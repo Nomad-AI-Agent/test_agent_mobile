@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test_agent_mobile/features/onboarding/presentation/onboarding_screen.dart';
-import 'package:test_agent_mobile/features/onboarding/presentation/welcome_screen.dart';
+import 'package:test_agent_mobile/core/routing/app_route.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,17 +18,17 @@ class NomadApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: ProviderScope(
-        child: MaterialApp(
+        child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
+          routerConfig: AppRoute.router,
           builder: (context, child) {
             return MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                textScaler: const TextScaler.linear(1.0),
-              ),
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: const TextScaler.linear(1.0)),
               child: child!,
             );
           },
-          home: const WelcomeScreen(),
         ),
       ),
     );
