@@ -43,11 +43,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       decoration: BoxDecoration(
         color: AppColorsLight.surface,
         borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
+        boxShadow:const [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black,
             blurRadius: 20,
-            offset: const Offset(0, 8),
+            offset:  Offset(0, 8),
           ),
         ],
       ),
