@@ -55,7 +55,7 @@ class RegisterForm extends ConsumerWidget {
           SizedBox(height: 16.h),
           RegisterUsernameField(controller: usernameController),
           SizedBox(height: 16.h),
-          LoginEmailField(controller: emailController), // ✅ reuse مباشر
+          LoginEmailField(controller: emailController), 
           SizedBox(height: 16.h),
           RegisterPasswordField(controller: passwordController),
           SizedBox(height: 24.h),
@@ -73,7 +73,7 @@ class RegisterForm extends ConsumerWidget {
           ),
           SizedBox(height: 20.h),
           RegisterLoginRow(
-            onLoginTap: () => context.pop(), // أو context.push(Routes.loginScreen)
+            onLoginTap: () => context.pop(), 
           ),
         ],
       ),
