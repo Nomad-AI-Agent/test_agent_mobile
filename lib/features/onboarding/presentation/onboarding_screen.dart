@@ -25,7 +25,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void _onContinuePressed() {
     if (_isLastPage) {
-      context.go(Routes.loginScreen); 
+      context.pushNamed(Routes.loginScreen); 
       return;
     }
     _pageController.nextPage(
@@ -35,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _onSkipPressed() {
-    context.go(Routes.loginScreen); 
+    context.pushNamed(Routes.loginScreen); 
   }
 
   @override

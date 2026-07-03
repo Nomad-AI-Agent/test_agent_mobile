@@ -7,8 +7,6 @@ import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:test_agent_mobile/core/network/api_service.dart' as _i3;
-import 'package:test_agent_mobile/features/auth/data/models/login/login_request_model.dart'
-    as _i5;
 import 'package:test_agent_mobile/features/auth/data/models/login/login_response_model.dart'
     as _i2;
 
@@ -42,7 +40,7 @@ class MockApiService extends _i1.Mock implements _i3.ApiService {
   }
 
   @override
-  _i4.Future<_i2.LoginResponseModel> login(_i5.LoginRequestModel? body) =>
+  _i4.Future<_i2.LoginResponseModel> login(Map<String, dynamic>? body) =>
       (super.noSuchMethod(
             Invocation.method(#login, [body]),
             returnValue: _i4.Future<_i2.LoginResponseModel>.value(

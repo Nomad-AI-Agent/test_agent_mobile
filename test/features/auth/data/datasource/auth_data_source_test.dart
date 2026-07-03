@@ -29,7 +29,7 @@ void main() {
   );
 
   when(
-    mockApiService.login(request),
+    mockApiService.login(request.toJson()),
   ).thenAnswer(
     (_) async => response,
   );

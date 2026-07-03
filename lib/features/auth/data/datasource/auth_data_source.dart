@@ -13,7 +13,7 @@ class AuthDataSourceImpl implements AuthDataSource {
 
   @override
   Future<LoginResponseModel> login(LoginRequestModel body) async {
-    final response = await apiService.login(body);
+    final response = await apiService.login(body.toJson());
     return response;
   }
 }

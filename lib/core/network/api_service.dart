@@ -8,7 +8,8 @@ import 'package:test_agent_mobile/features/auth/data/models/login/login_response
 part "api_service.g.dart";
 @RestApi(baseUrl:ApiConst.baseUrl )
 abstract class ApiService {
+  factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
   @POST(ApiConst.login)
-  Future<LoginResponseModel> login(@Body() LoginRequestModel body);
+  Future<LoginResponseModel> login(@Body() Map<String, dynamic> body);
   
 }
