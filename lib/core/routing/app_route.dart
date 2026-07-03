@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test_agent_mobile/core/routing/routes.dart';
+import 'package:test_agent_mobile/features/auth/presentation/views/login_screen.dart';
 import 'package:test_agent_mobile/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:test_agent_mobile/features/welcome/presentation/welcome_screen.dart';
 
@@ -47,11 +48,16 @@ class AppRoute {
           child: const OnboardingScreen(),
         ),
       ),
-    ],
-    errorBuilder: (context, state) => Scaffold(
-      body: Center(
-        child: Text('Page not found: ${state.uri}'),
+      GoRoute(
+        path: Routes.loginScreen,
+        name: Routes.loginScreen,
+        pageBuilder: (context, state) => _buildPageWithTransition(
+          key: state.pageKey,
+          child: const LoginScreen(),
+        ),
       ),
-    ),
+    ],
+    errorBuilder: (context, state) =>
+        Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),
   );
 }
