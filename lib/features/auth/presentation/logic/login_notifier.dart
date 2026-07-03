@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test_agent_mobile/features/auth/data/models/login/login_request_model.dart';
 import 'package:test_agent_mobile/features/auth/data/models/login/login_response_model.dart';
-import 'package:test_agent_mobile/features/auth/presentation/logic/login_provider.dart';
+import 'package:test_agent_mobile/features/auth/presentation/logic/auth_provider.dart';
 
 class LoginNotifier extends AsyncNotifier<LoginResponseModel?> {
   @override

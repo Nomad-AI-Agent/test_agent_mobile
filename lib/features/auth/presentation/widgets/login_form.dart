@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:test_agent_mobile/core/routing/routes.dart';
 import 'package:test_agent_mobile/features/auth/data/models/login/login_request_model.dart';
 import 'package:test_agent_mobile/features/auth/presentation/logic/login_notifier.dart';
 import 'package:test_agent_mobile/features/auth/presentation/widgets/login_button.dart';
-import 'package:test_agent_mobile/features/auth/presentation/widgets/login_email_field.dart';
-import 'package:test_agent_mobile/features/auth/presentation/widgets/login_password_field.dart';
+import 'package:test_agent_mobile/features/auth/presentation/widgets/email_field.dart';
+import 'package:test_agent_mobile/features/auth/presentation/widgets/password_field.dart';
 import 'package:test_agent_mobile/features/auth/presentation/widgets/login_sign_up_row.dart';
 
 class LoginFrom extends ConsumerWidget {
@@ -57,8 +59,7 @@ class LoginFrom extends ConsumerWidget {
           SizedBox(height: 20.h),
           LoginSignUpRow(
             onSignUpTap: () {
-              // TODO: navigate to signup screen
-              // context.push(Routes.signupScreen);
+               context.push(Routes.registerScreen);
             },
           ),
         ],

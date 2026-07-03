@@ -1,0 +1,19 @@
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'register_request_model.g.dart';
+part 'register_request_model.freezed.dart';
+@freezed
+abstract class RegisterRequestModel with _$RegisterRequestModel {
+  const factory RegisterRequestModel({
+    required String email,
+    required String username,
+    required String fullname,
+    required String password,
+  }) = _RegisterRequestModel;
+
+  factory RegisterRequestModel.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      _$RegisterRequestModelFromJson(json);
+}

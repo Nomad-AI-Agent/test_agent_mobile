@@ -7,8 +7,8 @@ import 'package:test_agent_mobile/core/styles/app_colors.dart';
 import 'package:test_agent_mobile/core/styles/app_text_sizes.dart';
 import 'package:test_agent_mobile/features/auth/data/models/login/login_response_model.dart';
 import 'package:test_agent_mobile/features/auth/presentation/logic/login_notifier.dart';
+import 'package:test_agent_mobile/features/auth/presentation/widgets/auth_header.dart';
 import 'package:test_agent_mobile/features/auth/presentation/widgets/login_form.dart';
-import 'package:test_agent_mobile/features/auth/presentation/widgets/login_header.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -38,23 +38,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   String _mapErrorToMessage(Object error) {
-   return 'Login failed. Please check your credentials and try again.';
+    return 'Login failed. Please check your credentials and try again.';
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<AsyncValue<LoginResponseModel?>>(loginNotifierProvider,
-        (previous, next) {
+    ref.listen<AsyncValue<LoginResponseModel?>>(loginNotifierProvider, (
+      previous,
+      next,
+    ) {
       next.whenOrNull(
         data: (data) {
           if (data != null) {
-            context.go(Routes.homeScreen); 
+            context.go(Routes.homeScreen);
           }
         },
         error: (error, stackTrace) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(_mapErrorToMessage(error))),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(_mapErrorToMessage(error))));
         },
       );
     });
@@ -87,7 +89,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 16.h),
-              const LoginHeader(),
+              const AuthHeader(
+                title: 'Welcome Back!',
+                subtitle: 'Log in to continue testing with Nomad.',
+                subtitleColor: AppColorsDark.primaryFixed,
+              ),
               SizedBox(height: 32.h),
               LoginFrom(
                 emailController: emailController,

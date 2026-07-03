@@ -2,6 +2,7 @@
 import 'package:test_agent_mobile/features/auth/data/datasource/auth_data_source.dart';
 import 'package:test_agent_mobile/features/auth/data/models/login/login_request_model.dart';
 import 'package:test_agent_mobile/features/auth/data/models/login/login_response_model.dart';
+import 'package:test_agent_mobile/features/auth/data/models/register/register_request_model.dart';
 import 'package:test_agent_mobile/features/auth/domain/repo/auth_repo.dart';
 
 class AuthRepoImpl extends AuthRepo {
@@ -13,5 +14,10 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<LoginResponseModel> login(LoginRequestModel body) {
     return authDataSource.login(body);
+  }
+
+  @override
+  Future<void> register(RegisterRequestModel body) {
+    return authDataSource.register(body);
   }
 }

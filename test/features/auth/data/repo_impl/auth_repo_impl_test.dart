@@ -18,23 +18,30 @@ void main() {
     authRepo = AuthRepoImpl(authDataSource: mockAuthDataSource);
   });
 
-  test('test in repo must be success', () async {
-    // Arrange
-    const loginRequest = LoginRequestModel(
-      login: "testuser",
-      password: "testpassword"
-    );
+  group("login in repo", () {
+    test('test in repo must be success', () async {
+      // Arrange
+      const loginRequest = LoginRequestModel(
+        login: "testuser",
+        password: "testpassword",
+      );
 
-    const loginResponse = LoginResponseModel(
-      accessToken: "testaccesstoken",
-      tokenType: "bearer"
-    );
+      const loginResponse = LoginResponseModel(
+        accessToken: "testaccesstoken",
+        tokenType: "bearer",
+      );
 
-    when(mockAuthDataSource.login(loginRequest))
-        .thenAnswer((_) async => loginResponse);
+      when(
+        mockAuthDataSource.login(loginRequest),
+      ).thenAnswer((_) async => loginResponse);
 
-    // Act
-    final result = await authRepo.login(loginRequest);
-    expect(result, loginResponse);
+      // Act
+      final result = await authRepo.login(loginRequest);
+      expect(result, loginResponse);
+    });
+  });
+
+  group("register in repo", () {
+    
   });
 }
