@@ -29,7 +29,6 @@ class LoginFrom extends ConsumerWidget {
         password: passwordController.text,
       );
       await ref.read(loginNotifierProvider.notifier).login(body);
-      
     }
   }
 
@@ -47,9 +46,7 @@ class LoginFrom extends ConsumerWidget {
           SizedBox(height: 20.h),
           LoginPasswordField(
             controller: passwordController,
-            onForgotPasswordTap: () {
-              // TODO: navigate to forgot password screen
-            },
+            onForgotPasswordTap: () {},
           ),
           SizedBox(height: 28.h),
           LoginButton(
@@ -59,7 +56,7 @@ class LoginFrom extends ConsumerWidget {
           SizedBox(height: 20.h),
           LoginSignUpRow(
             onSignUpTap: () {
-               context.push(Routes.registerScreen);
+              context.push(Routes.registerScreen);
             },
           ),
         ],

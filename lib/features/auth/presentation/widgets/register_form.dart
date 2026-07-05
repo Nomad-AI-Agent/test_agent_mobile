@@ -1,4 +1,3 @@
-// register_form.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +54,7 @@ class RegisterForm extends ConsumerWidget {
           SizedBox(height: 16.h),
           RegisterUsernameField(controller: usernameController),
           SizedBox(height: 16.h),
-          LoginEmailField(controller: emailController), 
+          LoginEmailField(controller: emailController),
           SizedBox(height: 16.h),
           RegisterPasswordField(controller: passwordController),
           SizedBox(height: 24.h),
@@ -65,16 +64,9 @@ class RegisterForm extends ConsumerWidget {
             onPressed: () => _onRegisterPressed(ref),
           ),
           SizedBox(height: 16.h),
-          RegisterTermsRow(
-            onTermsTap: () {
-            },
-            onPrivacyTap: () {
-            },
-          ),
+          RegisterTermsRow(onTermsTap: () {}, onPrivacyTap: () {}),
           SizedBox(height: 20.h),
-          RegisterLoginRow(
-            onLoginTap: () => context.pop(), 
-          ),
+          RegisterLoginRow(onLoginTap: () => context.pop()),
         ],
       ),
     );

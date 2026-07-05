@@ -12,6 +12,8 @@ import 'package:test_agent_mobile/features/auth/data/models/login/login_request_
     as _i5;
 import 'package:test_agent_mobile/features/auth/data/models/login/login_response_model.dart'
     as _i2;
+import 'package:test_agent_mobile/features/auth/data/models/register/register_request_model.dart'
+    as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -54,4 +56,13 @@ class MockAuthDataSource extends _i1.Mock implements _i3.AuthDataSource {
             ),
           )
           as _i4.Future<_i2.LoginResponseModel>);
+
+  @override
+  _i4.Future<void> register(_i6.RegisterRequestModel? body) =>
+      (super.noSuchMethod(
+            Invocation.method(#register, [body]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 }

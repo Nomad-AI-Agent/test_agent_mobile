@@ -5,6 +5,7 @@ import 'package:test_agent_mobile/features/auth/presentation/views/home_test.dar
 import 'package:test_agent_mobile/features/auth/presentation/views/login_screen.dart';
 import 'package:test_agent_mobile/features/auth/presentation/views/register_screen.dart';
 import 'package:test_agent_mobile/features/onboarding/presentation/onboarding_screen.dart';
+import 'package:test_agent_mobile/features/projects/presentation/projects_screen.dart';
 import 'package:test_agent_mobile/features/welcome/presentation/welcome_screen.dart';
 
 class AppRoute {
@@ -72,6 +73,14 @@ class AppRoute {
         pageBuilder: (context, state) => _buildPageWithTransition(
           key: state.pageKey,
           child: const RegisterScreen(),
+        ),
+      ),
+      GoRoute(
+        path: Routes.projectScreen,
+        name: Routes.projectScreen,
+        pageBuilder: (context, state) => _buildPageWithTransition(
+          key: state.pageKey,
+          child: const ProjectsScreen(),
         ),
       ),
     ],

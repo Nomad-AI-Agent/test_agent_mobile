@@ -10,7 +10,6 @@ class LoginEmailField extends StatelessWidget {
 
   final TextEditingController controller;
 
-
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -50,7 +50,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       next.whenOrNull(
         data: (data) {
           if (data != null) {
-            context.go(Routes.homeScreen);
+            context.go(Routes.projectScreen);
           }
         },
         error: (error, stackTrace) {

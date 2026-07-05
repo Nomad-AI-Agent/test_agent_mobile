@@ -16,12 +16,15 @@ class RegisterTermsRow extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          style: TextStyle(fontSize: 12.sp, color: AppColorsLight.textSecondary),
+          style: TextStyle(
+            fontSize: 12.sp,
+            color: AppColorsLight.textSecondary,
+          ),
           children: [
             const TextSpan(text: "By signing up, you agree to our "),
             TextSpan(
               text: "Terms",
-              style:const TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 decoration: TextDecoration.underline,
                 color: AppColorsLight.textPrimary,

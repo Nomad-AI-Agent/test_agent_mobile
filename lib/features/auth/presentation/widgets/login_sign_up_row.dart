@@ -22,7 +22,7 @@ class LoginSignUpRow extends StatelessWidget {
             const TextSpan(text: "Don't have an account? "),
             TextSpan(
               text: "Sign up",
-              style:const  TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 color: AppColorsLight.primary,
               ),
