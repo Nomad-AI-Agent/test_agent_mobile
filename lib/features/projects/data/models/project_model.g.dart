@@ -10,9 +10,9 @@ _ProjectModel _$ProjectModelFromJson(Map<String, dynamic> json) =>
     _ProjectModel(
       id: json['id'] as String,
       name: json['name'] as String,
-      description: json['description'] as String,
-      runsCount: (json['runsCount'] as num).toInt(),
-      lastRunDate: DateTime.parse(json['lastRunDate'] as String),
+      description: json['description'] as String?,
+      runsCount: (json['run_count'] as num?)?.toInt() ?? 0,
+      lastRunDate: DateTime.parse(json['created_at_iso'] as String),
       userid: json['user_id'] as String?,
     );
 
@@ -21,7 +21,7 @@ Map<String, dynamic> _$ProjectModelToJson(_ProjectModel instance) =>
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
-      'runsCount': instance.runsCount,
-      'lastRunDate': instance.lastRunDate.toIso8601String(),
+      'run_count': instance.runsCount,
+      'created_at_iso': instance.lastRunDate.toIso8601String(),
       'user_id': instance.userid,
     };

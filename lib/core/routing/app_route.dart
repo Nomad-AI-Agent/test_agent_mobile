@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:test_agent_mobile/core/functions/determine_initial_route.dart';
 import 'package:test_agent_mobile/core/routing/routes.dart';
 import 'package:test_agent_mobile/features/auth/presentation/views/home_test.dart';
 import 'package:test_agent_mobile/features/auth/presentation/views/login_screen.dart';
 import 'package:test_agent_mobile/features/auth/presentation/views/register_screen.dart';
 import 'package:test_agent_mobile/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:test_agent_mobile/features/projects/presentation/projects_screen.dart';
+import 'package:test_agent_mobile/features/splash/animated_splash_screen.dart';
 import 'package:test_agent_mobile/features/welcome/presentation/welcome_screen.dart';
 
 class AppRoute {
@@ -32,9 +34,25 @@ class AppRoute {
   }
 
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.welcomeScreen,
+    initialLocation: Routes.splashScreen,
     debugLogDiagnostics: true,
     routes: [
+      GoRoute(
+        path: Routes.splashScreen,
+        name: Routes.splashScreen,
+        pageBuilder: (context, state) => _buildPageWithTransition(
+          key: state.pageKey,
+          child: AnimatedSplashScreen(
+            onAnimationComplete: () async {
+              final route = await determineInitialRoute();
+              if (context.mounted) {
+                context.go(route);
+              }
+            },
+          ),
+        ),
+      ),
+
       GoRoute(
         path: Routes.welcomeScreen,
         name: Routes.welcomeScreen,

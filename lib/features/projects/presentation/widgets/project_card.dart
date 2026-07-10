@@ -21,6 +21,7 @@ class ProjectCard extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
+          // ignore: deprecated_member_use
           color: AppColorsDark.onSurface.withOpacity(0.05),
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: Colors.grey.shade300, width: 1),

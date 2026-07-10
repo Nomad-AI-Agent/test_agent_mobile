@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProjectModel {
 
- String get id; String get name; String get description; int get runsCount; DateTime get lastRunDate;@JsonKey(name: 'user_id') String? get userid;
+ String get id; String get name; String? get description;@JsonKey(name: 'run_count') int get runsCount;@JsonKey(name: 'created_at_iso') DateTime get lastRunDate;@JsonKey(name: 'user_id') String? get userid;
 /// Create a copy of ProjectModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ProjectModelCopyWith<$Res>  {
   factory $ProjectModelCopyWith(ProjectModel value, $Res Function(ProjectModel) _then) = _$ProjectModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String description, int runsCount, DateTime lastRunDate,@JsonKey(name: 'user_id') String? userid
+ String id, String name, String? description,@JsonKey(name: 'run_count') int runsCount,@JsonKey(name: 'created_at_iso') DateTime lastRunDate,@JsonKey(name: 'user_id') String? userid
 });
 
 
@@ -65,12 +65,12 @@ class _$ProjectModelCopyWithImpl<$Res>
 
 /// Create a copy of ProjectModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? description = null,Object? runsCount = null,Object? lastRunDate = null,Object? userid = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? description = freezed,Object? runsCount = null,Object? lastRunDate = null,Object? userid = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,runsCount: null == runsCount ? _self.runsCount : runsCount // ignore: cast_nullable_to_non_nullable
+as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,runsCount: null == runsCount ? _self.runsCount : runsCount // ignore: cast_nullable_to_non_nullable
 as int,lastRunDate: null == lastRunDate ? _self.lastRunDate : lastRunDate // ignore: cast_nullable_to_non_nullable
 as DateTime,userid: freezed == userid ? _self.userid : userid // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String description,  int runsCount,  DateTime lastRunDate, @JsonKey(name: 'user_id')  String? userid)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String? description, @JsonKey(name: 'run_count')  int runsCount, @JsonKey(name: 'created_at_iso')  DateTime lastRunDate, @JsonKey(name: 'user_id')  String? userid)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProjectModel() when $default != null:
 return $default(_that.id,_that.name,_that.description,_that.runsCount,_that.lastRunDate,_that.userid);case _:
@@ -179,7 +179,7 @@ return $default(_that.id,_that.name,_that.description,_that.runsCount,_that.last
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String description,  int runsCount,  DateTime lastRunDate, @JsonKey(name: 'user_id')  String? userid)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String? description, @JsonKey(name: 'run_count')  int runsCount, @JsonKey(name: 'created_at_iso')  DateTime lastRunDate, @JsonKey(name: 'user_id')  String? userid)  $default,) {final _that = this;
 switch (_that) {
 case _ProjectModel():
 return $default(_that.id,_that.name,_that.description,_that.runsCount,_that.lastRunDate,_that.userid);case _:
@@ -199,7 +199,7 @@ return $default(_that.id,_that.name,_that.description,_that.runsCount,_that.last
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String description,  int runsCount,  DateTime lastRunDate, @JsonKey(name: 'user_id')  String? userid)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String? description, @JsonKey(name: 'run_count')  int runsCount, @JsonKey(name: 'created_at_iso')  DateTime lastRunDate, @JsonKey(name: 'user_id')  String? userid)?  $default,) {final _that = this;
 switch (_that) {
 case _ProjectModel() when $default != null:
 return $default(_that.id,_that.name,_that.description,_that.runsCount,_that.lastRunDate,_that.userid);case _:
@@ -214,14 +214,14 @@ return $default(_that.id,_that.name,_that.description,_that.runsCount,_that.last
 @JsonSerializable()
 
 class _ProjectModel implements ProjectModel {
-  const _ProjectModel({required this.id, required this.name, required this.description, required this.runsCount, required this.lastRunDate, @JsonKey(name: 'user_id') this.userid});
+  const _ProjectModel({required this.id, required this.name, this.description, @JsonKey(name: 'run_count') this.runsCount = 0, @JsonKey(name: 'created_at_iso') required this.lastRunDate, @JsonKey(name: 'user_id') this.userid});
   factory _ProjectModel.fromJson(Map<String, dynamic> json) => _$ProjectModelFromJson(json);
 
 @override final  String id;
 @override final  String name;
-@override final  String description;
-@override final  int runsCount;
-@override final  DateTime lastRunDate;
+@override final  String? description;
+@override@JsonKey(name: 'run_count') final  int runsCount;
+@override@JsonKey(name: 'created_at_iso') final  DateTime lastRunDate;
 @override@JsonKey(name: 'user_id') final  String? userid;
 
 /// Create a copy of ProjectModel
@@ -257,7 +257,7 @@ abstract mixin class _$ProjectModelCopyWith<$Res> implements $ProjectModelCopyWi
   factory _$ProjectModelCopyWith(_ProjectModel value, $Res Function(_ProjectModel) _then) = __$ProjectModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String description, int runsCount, DateTime lastRunDate,@JsonKey(name: 'user_id') String? userid
+ String id, String name, String? description,@JsonKey(name: 'run_count') int runsCount,@JsonKey(name: 'created_at_iso') DateTime lastRunDate,@JsonKey(name: 'user_id') String? userid
 });
 
 
@@ -274,12 +274,12 @@ class __$ProjectModelCopyWithImpl<$Res>
 
 /// Create a copy of ProjectModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? description = null,Object? runsCount = null,Object? lastRunDate = null,Object? userid = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? description = freezed,Object? runsCount = null,Object? lastRunDate = null,Object? userid = freezed,}) {
   return _then(_ProjectModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,runsCount: null == runsCount ? _self.runsCount : runsCount // ignore: cast_nullable_to_non_nullable
+as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,runsCount: null == runsCount ? _self.runsCount : runsCount // ignore: cast_nullable_to_non_nullable
 as int,lastRunDate: null == lastRunDate ? _self.lastRunDate : lastRunDate // ignore: cast_nullable_to_non_nullable
 as DateTime,userid: freezed == userid ? _self.userid : userid // ignore: cast_nullable_to_non_nullable
 as String?,
