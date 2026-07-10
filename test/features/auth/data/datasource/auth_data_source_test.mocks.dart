@@ -9,6 +9,10 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:test_agent_mobile/core/network/api_service.dart' as _i3;
 import 'package:test_agent_mobile/features/auth/data/models/login/login_response_model.dart'
     as _i2;
+import 'package:test_agent_mobile/features/projects/data/models/create_project_model.dart'
+    as _i6;
+import 'package:test_agent_mobile/features/projects/data/models/project_model.dart'
+    as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -56,6 +60,25 @@ class MockApiService extends _i1.Mock implements _i3.ApiService {
   _i4.Future<void> register(Map<String, dynamic>? body) =>
       (super.noSuchMethod(
             Invocation.method(#register, [body]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<List<_i5.ProjectModel>> getProjects() =>
+      (super.noSuchMethod(
+            Invocation.method(#getProjects, []),
+            returnValue: _i4.Future<List<_i5.ProjectModel>>.value(
+              <_i5.ProjectModel>[],
+            ),
+          )
+          as _i4.Future<List<_i5.ProjectModel>>);
+
+  @override
+  _i4.Future<void> createProject(_i6.CreateProjectModel? createProjectModel) =>
+      (super.noSuchMethod(
+            Invocation.method(#createProject, [createProjectModel]),
             returnValue: _i4.Future<void>.value(),
             returnValueForMissingStub: _i4.Future<void>.value(),
           )
