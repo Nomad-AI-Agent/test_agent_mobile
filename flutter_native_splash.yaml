@@ -1,0 +1,7 @@
+# pubspec.yaml
+flutter_native_splash:
+  color: "#FFFFFF"                           
+  image: assets/images/logo_white.png          
+
+  android: true
+  ios: true
