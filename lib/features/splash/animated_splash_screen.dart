@@ -62,7 +62,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final logoSize = size.width * 1.1;
+    final logoSize = size.width ;
 
     return Scaffold(
       body: Center(
@@ -74,7 +74,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
               child: ScaleTransition(
                 scale: _scaleAnimation,
                 child: Image.asset(
-                  Assets.assetsImagesLogoWhite, // أو WhiteLogo حسب اللي عايزه
+                  Assets.assetsImagesLogoWhite,
                   width: logoSize,
                   height: logoSize,
                 ),

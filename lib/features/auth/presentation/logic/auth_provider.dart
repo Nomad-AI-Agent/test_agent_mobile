@@ -1,10 +1,9 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test_agent_mobile/core/network/api_service.dart';
+import 'package:test_agent_mobile/core/services/secure_storage_service.dart';
 import 'package:test_agent_mobile/features/auth/data/datasource/auth_data_source.dart';
 import 'package:test_agent_mobile/features/auth/data/repo_impl/auth_repo_impl.dart';
-
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
@@ -15,8 +14,20 @@ final dioProvider = Provider<Dio>((ref) {
   );
 
   dio.interceptors.add(
-    LogInterceptor(requestBody: true, responseBody: true),
+    InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        final token = await SecureStorageService.getToken();
+
+        if (token != null && token.isNotEmpty) {
+          options.headers['Authorization'] = 'Bearer $token';
+        }
+
+        handler.next(options);
+      },
+    ),
   );
+
+  dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
 
   return dio;
 });
@@ -35,4 +46,3 @@ final authRepoProvider = Provider<AuthRepoImpl>((ref) {
   final authDataSource = ref.watch(authDataSourceProvider);
   return AuthRepoImpl(authDataSource: authDataSource);
 });
-
