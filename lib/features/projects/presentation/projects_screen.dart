@@ -4,6 +4,7 @@ import 'package:test_agent_mobile/core/styles/app_colors.dart';
 import 'package:test_agent_mobile/features/projects/presentation/widgets/create_project_fab.dart';
 import 'package:test_agent_mobile/features/projects/presentation/widgets/project_screen_header.dart';
 import 'package:test_agent_mobile/features/projects/presentation/widgets/projects_list_view.dart';
+import 'package:test_agent_mobile/features/projects/presentation/widgets/projects_search_bar.dart';
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({super.key});
@@ -20,7 +21,9 @@ class ProjectsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const ProjectsScreenHeader(),
-              SizedBox(height: 20.h),
+              SizedBox(height: 16.h),
+              const ProjectsSearchBar(),
+              SizedBox(height: 16.h),
               const Expanded(child: ProjectsListView()),
             ],
           ),

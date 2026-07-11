@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:test_agent_mobile/features/auth/presentation/logic/auth_provider.dart';
 import 'package:test_agent_mobile/features/projects/data/datasources/project_remote_data_source.dart';
 import 'package:test_agent_mobile/features/projects/data/repo_impl/projects_repo_impl.dart';
@@ -26,3 +27,5 @@ final getProjectsUseCase = Provider<GetAllProjectsUseCase>((ref) {
   final projectRepo = ref.watch(projectRepoProvider);
   return GetAllProjectsUseCase(projectsRepo: projectRepo);
 });
+
+final searchQueryProvider = StateProvider<String>((ref) => '');
