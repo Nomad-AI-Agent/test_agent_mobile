@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:test_agent_mobile/core/styles/app_colors.dart';
 import 'package:test_agent_mobile/features/dashboard/domain/entity/sequence_item.dart';
 import 'package:test_agent_mobile/features/dashboard/presentation/widgets/sequence_meta_row.dart';
@@ -13,9 +12,6 @@ class SequenceCard extends StatelessWidget {
 
   const SequenceCard({super.key, required this.sequence, this.onTap});
 
-  String _formatTimestamp(DateTime date) {
-    return DateFormat("M/d/yyyy, h:mm:ss a").format(date);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,16 +52,7 @@ class SequenceCard extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 6.h),
-                            SequenceMetaRow(
-                              id: sequence.id,
-                              url: sequence.url,
-                              formattedTimestamp:
-                                  _formatTimestamp(sequence.timestamp),
-                              formattedDuration:
-                                  "${sequence.durationSeconds}s",
-                              passedSteps: sequence.passedSteps,
-                              failedSteps: sequence.failedSteps,
-                            ),
+                            SequenceMetaRow(id: sequence.id, url: sequence.url),
                           ],
                         ),
                       ),

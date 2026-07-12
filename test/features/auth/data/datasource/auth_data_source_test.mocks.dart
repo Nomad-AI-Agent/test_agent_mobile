@@ -9,8 +9,6 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:test_agent_mobile/core/network/api_service.dart' as _i3;
 import 'package:test_agent_mobile/features/auth/data/models/login/login_response_model.dart'
     as _i2;
-import 'package:test_agent_mobile/features/projects/data/models/create_project_model.dart'
-    as _i6;
 import 'package:test_agent_mobile/features/projects/data/models/project_model.dart'
     as _i5;
 
@@ -76,9 +74,9 @@ class MockApiService extends _i1.Mock implements _i3.ApiService {
           as _i4.Future<List<_i5.ProjectModel>>);
 
   @override
-  _i4.Future<void> createProject(_i6.CreateProjectModel? createProjectModel) =>
+  _i4.Future<void> createProject(Map<String, dynamic>? body) =>
       (super.noSuchMethod(
-            Invocation.method(#createProject, [createProjectModel]),
+            Invocation.method(#createProject, [body]),
             returnValue: _i4.Future<void>.value(),
             returnValueForMissingStub: _i4.Future<void>.value(),
           )

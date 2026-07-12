@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_agent_mobile/core/styles/app_colors.dart';
-import 'package:test_agent_mobile/features/dashboard/dashboard_screen.dart';
+import 'package:test_agent_mobile/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:test_agent_mobile/features/history/presentation/history_screen.dart';
 import 'package:test_agent_mobile/features/navigation/navigation_screen.dart';
 import 'package:test_agent_mobile/features/projects/presentation/projects_screen.dart';

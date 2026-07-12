@@ -5,19 +5,12 @@ import 'package:test_agent_mobile/core/styles/app_colors.dart';
 class SequenceMetaRow extends StatelessWidget {
   final String id;
   final String url;
-  final String formattedTimestamp;
-  final String formattedDuration;
-  final int passedSteps;
-  final int failedSteps;
+
 
   const SequenceMetaRow({
     super.key,
     required this.id,
     required this.url,
-    required this.formattedTimestamp,
-    required this.formattedDuration,
-    required this.passedSteps,
-    required this.failedSteps,
   });
 
   Widget _metaChip(IconData icon, String text) {
@@ -28,10 +21,7 @@ class SequenceMetaRow extends StatelessWidget {
         SizedBox(width: 4.w),
         Text(
           text,
-          style: TextStyle(
-            fontSize: 11.sp,
-            color: AppColorsLight.textMuted,
-          ),
+          style: TextStyle(fontSize: 11.sp, color: AppColorsLight.textMuted),
         ),
       ],
     );
@@ -53,12 +43,6 @@ class SequenceMetaRow extends StatelessWidget {
           ),
         ),
         _metaChip(Icons.link, url),
-        _metaChip(Icons.access_time, formattedTimestamp),
-        _metaChip(Icons.timer_outlined, formattedDuration),
-        _metaChip(
-          Icons.checklist_rtl,
-          "${passedSteps}p / ${failedSteps}f",
-        ),
       ],
     );
   }
