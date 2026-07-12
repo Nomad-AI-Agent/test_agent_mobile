@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_agent_mobile/core/widgets/error_state_view.dart';
 import 'package:test_agent_mobile/features/projects/data/helper/project_model_mapper.dart';
 import 'package:test_agent_mobile/features/projects/presentation/logic/notifiers/get_projects_notifier.dart';
 import 'package:test_agent_mobile/features/projects/presentation/logic/notifiers/project_pagination_notifier.dart';
@@ -17,7 +18,10 @@ class ProjectsListView extends ConsumerWidget {
 
     return projectsState.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, _) => Center(child: Text('Failed to load projects: $err')),
+      error: (err, _) => ErrorStateView(
+        error: err,
+        onRetry: () => ref.read(projectsListProvider.notifier).refresh(),
+      ),
       data: (_) {
         final pageData = ref.watch(projectsPageDataProvider);
 
