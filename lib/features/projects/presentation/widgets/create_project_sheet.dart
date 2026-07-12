@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test_agent_mobile/core/styles/app_colors.dart';
+import 'package:test_agent_mobile/features/projects/data/models/create_project_model.dart';
+import 'package:test_agent_mobile/features/projects/presentation/logic/notifiers/create_project_notifier.dart';
+import 'package:test_agent_mobile/features/projects/presentation/widgets/labeled_form_field.dart';
+import 'package:test_agent_mobile/features/projects/presentation/widgets/sheet_action_button.dart';
+import 'package:test_agent_mobile/features/projects/presentation/widgets/sheet_drag_handle.dart';
+import 'package:test_agent_mobile/features/projects/presentation/widgets/sheet_header.dart';
 
-class CreateProjectSheet extends StatefulWidget {
+class CreateProjectSheet extends ConsumerStatefulWidget {
   const CreateProjectSheet({super.key});
 
   @override
-  State<CreateProjectSheet> createState() => _CreateProjectSheetState();
+  ConsumerState<CreateProjectSheet> createState() => _CreateProjectSheetState();
 }
 
-class _CreateProjectSheetState extends State<CreateProjectSheet> {
+class _CreateProjectSheetState extends ConsumerState<CreateProjectSheet> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -22,51 +27,38 @@ class _CreateProjectSheetState extends State<CreateProjectSheet> {
     super.dispose();
   }
 
-  InputDecoration _inputDecoration(String hint) {
-    return InputDecoration(
-      hintText: hint,
-      hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey.shade400),
-      filled: true,
-      fillColor: Colors.grey.shade50,
-      contentPadding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide(color: Colors.grey.shade300),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.r),
-        borderSide: BorderSide(color: Colors.grey.shade300),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.r),
-        borderSide: const BorderSide(color: AppColorsDark.surface, width: 1.5),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.r),
-        borderSide: const BorderSide(color: Colors.red, width: 1.2),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.r),
-        borderSide: const BorderSide(color: Colors.red, width: 1.2),
-      ),
-    );
-  }
-
   Future<void> _handleCreate() async {
     if (!_formKey.currentState!.validate()) return;
 
-    setState(() => _isLoading = true);
-
-    await Future.delayed(const Duration(seconds: 1));
-
-    if (mounted) {
-      setState(() => _isLoading = false);
+    final success = await ref
+        .read(createProjectNotifierProvider.notifier)
+        .createProject(
+          createProjectModel: CreateProjectModel(
+            name: _nameController.text.trim(),
+            description: _descriptionController.text.trim(),
+          ),
+        );
+    if (success && mounted) {
       Navigator.pop(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final createState = ref.watch(createProjectNotifierProvider);
+    final isLoading = createState.isLoading;
+
+    ref.listen<AsyncValue<void>>(createProjectNotifierProvider, (
+      previous,
+      next,
+    ) {
+      if (next.hasError && !next.isLoading) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to create project: ${next.error}')),
+        );
+      }
+    });
+
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -83,175 +75,39 @@ class _CreateProjectSheetState extends State<CreateProjectSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Drag handle
-              Center(
-                child: Container(
-                  width: 36.w,
-                  height: 4.h,
-                  margin: EdgeInsets.only(bottom: 18.h),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                ),
-              ),
-
-              // Header: icon + title + close button
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 32.w,
-                        height: 32.h,
-                        decoration: BoxDecoration(
-                          color: AppColorsLight.surfaceContainerLow,
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.create_new_folder_outlined,
-                          size: 18.sp,
-                          color: AppColorsDark.surface,
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      Text(
-                        "New project",
-                        style: TextStyle(
-                          fontSize: 17.sp,
-                          fontFamily: "newsreader",
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      width: 30.w,
-                      height: 30.h,
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.close,
-                        size: 18.sp,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                  ),
-                ],
+              const SheetDragHandle(),
+              SheetHeader(
+                title: "New project",
+                onClose: () => Navigator.pop(context),
               ),
               SizedBox(height: 4.h),
-
-              // Subtitle
               Text(
                 "Give your project a name and a short description.",
                 style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade500),
               ),
               SizedBox(height: 20.h),
-
-              // Project name field
-              Text(
-                "Project name",
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey.shade700,
-                ),
-              ),
-              SizedBox(height: 6.h),
-              TextFormField(
-                cursorColor: AppColorsDark.surface,
+              LabeledFormField(
+                label: "Project name",
+                hint: "Website redesign",
                 controller: _nameController,
-                style: TextStyle(fontSize: 14.sp),
-                decoration: _inputDecoration("Website redesign"),
+                helperText: "Visible to everyone on the team.",
                 validator: (value) => (value == null || value.trim().isEmpty)
                     ? "Project name is required"
                     : null,
               ),
-              SizedBox(height: 6.h),
-              Text(
-                "Visible to everyone on the team.",
-                style: TextStyle(fontSize: 12.sp, color: Colors.grey.shade400),
-              ),
               SizedBox(height: 18.h),
-
-              // Description field
-              Text(
-                "Description",
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey.shade700,
-                ),
-              ),
-              SizedBox(height: 6.h),
-              TextFormField(
-                cursorColor: AppColorsDark.surface,
+              LabeledFormField(
+                label: "Description",
+                hint: "What's this project about?",
                 controller: _descriptionController,
                 maxLines: 3,
-                style: TextStyle(fontSize: 14.sp),
-                decoration: _inputDecoration("What's this project about?"),
               ),
               SizedBox(height: 24.h),
-
-              // Action buttons
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: _isLoading
-                          ? null
-                          : () => Navigator.pop(context),
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 14.h),
-                        side: BorderSide(color: Colors.grey.shade300),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                      ),
-                      child: Text(
-                        "Cancel",
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          color: Colors.grey.shade700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 12.w),
-                  Expanded(
-                    flex: 2,
-                    child: ElevatedButton(
-                      onPressed: _isLoading ? null : _handleCreate,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColorsDark.surface,
-                        padding: EdgeInsets.symmetric(vertical: 14.h),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                      ),
-                      child: _isLoading
-                          ? SizedBox(
-                              width: 18.w,
-                              height: 18.h,
-                              child: const CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
-                            )
-                          : Text(
-                              "Create project",
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                    ),
-                  ),
-                ],
+              SheetActionButtons(
+                isLoading: isLoading,
+                onCancel: () => Navigator.pop(context),
+                onSubmit: _handleCreate,
+                submitLabel: "Create project",
               ),
             ],
           ),

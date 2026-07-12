@@ -13,7 +13,7 @@ class ProjectRemoteDataSourceImpl extends ProjectRemoteDataSource {
   ProjectRemoteDataSourceImpl({required this.apiService});
   @override
   Future<void> createProject(CreateProjectModel createProjectModel) async {
-    await apiService.createProject(createProjectModel);
+    await apiService.createProject(createProjectModel.toJson());
   }
 
   @override
