@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:test_agent_mobile/core/network/api_const.dart';
 import 'package:test_agent_mobile/features/auth/data/models/login/login_response_model.dart';
-import 'package:test_agent_mobile/features/projects/data/models/create_project_model.dart';
 import 'package:test_agent_mobile/features/projects/data/models/project_model.dart';
 
 part "api_service.g.dart";
@@ -18,5 +17,5 @@ abstract class ApiService {
   @GET(ApiConst.projects)
   Future<List<ProjectModel>> getProjects();
   @POST(ApiConst.projects)
-  Future<void> createProject(CreateProjectModel createProjectModel);
+  Future<void> createProject(@Body() Map<String, dynamic> body);
 }
