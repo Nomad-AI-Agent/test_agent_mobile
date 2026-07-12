@@ -22,7 +22,7 @@ class ProjectsListView extends ConsumerWidget {
         error: err,
         onRetry: () => ref.read(projectsListProvider.notifier).refresh(),
       ),
-      data: (_) {
+      data: (result) {
         final pageData = ref.watch(projectsPageDataProvider);
 
         if (!pageData.hasProjects) {

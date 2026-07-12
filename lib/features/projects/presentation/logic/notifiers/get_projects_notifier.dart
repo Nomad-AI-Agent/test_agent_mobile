@@ -1,11 +1,23 @@
-import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:test_agent_mobile/features/projects/data/models/project_model.dart';
+import 'package:test_agent_mobile/core/network/connectivity_provider.dart';
+import 'package:test_agent_mobile/features/projects/domain/entities/projects_result.dart';
 import 'package:test_agent_mobile/features/projects/presentation/logic/project_provider.dart';
 
-class ProjectsListNotifier extends AsyncNotifier<List<ProjectModel>> {
+class ProjectsListNotifier extends AsyncNotifier<ProjectsResult> {
+  bool? _wasConnected;
+
   @override
-  Future<List<ProjectModel>> build() async {
+  Future<ProjectsResult> build() async {
+    ref.listen<AsyncValue<bool>>(connectivityStreamProvider, (previous, next) {
+      final isConnected = next.value;
+      if (isConnected == null) return;
+
+      if (_wasConnected == false && isConnected == true) {
+        refresh();
+      }
+      _wasConnected = isConnected;
+    });
+
     final usecase = ref.watch(getProjectsUseCase);
     return usecase.execute();
   }
@@ -20,6 +32,6 @@ class ProjectsListNotifier extends AsyncNotifier<List<ProjectModel>> {
 }
 
 final projectsListProvider =
-    AsyncNotifierProvider<ProjectsListNotifier, List<ProjectModel>>(
+    AsyncNotifierProvider<ProjectsListNotifier, ProjectsResult>(
   ProjectsListNotifier.new,
 );

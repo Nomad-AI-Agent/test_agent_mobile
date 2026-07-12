@@ -1,6 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:test_agent_mobile/core/local_storage/app_database.dart';
+import 'package:test_agent_mobile/core/network/connectivity_provider.dart';
 import 'package:test_agent_mobile/features/auth/presentation/logic/auth_provider.dart';
+import 'package:test_agent_mobile/features/projects/data/datasources/project_local_data_srouce.dart';
 import 'package:test_agent_mobile/features/projects/data/datasources/project_remote_data_source.dart';
 import 'package:test_agent_mobile/features/projects/data/models/project_model.dart';
 import 'package:test_agent_mobile/features/projects/data/repo_impl/projects_repo_impl.dart';
@@ -17,11 +20,24 @@ final projectRemoteDataSourceProvider = Provider<ProjectRemoteDataSourceImpl>((
   return ProjectRemoteDataSourceImpl(apiService: apiService);
 });
 
-final projectRepoProvider = Provider<ProjectsRepoImpl>((ref) {
-  final projectRemoteDataSource = ref.watch(projectRemoteDataSourceProvider);
-  return ProjectsRepoImpl(projectRemoteDataSource: projectRemoteDataSource);
+final appDatabaseProvider = Provider<AppDatabase>((ref) {
+  final db = AppDatabase();
+  ref.onDispose(db.close);
+  return db;
 });
 
+final projectLocalDataSourceProvider = Provider<ProjectLocalDataSource>((ref) {
+  final db = ref.watch(appDatabaseProvider);
+  return ProjectLocalDataSourceImpl(dao: db.projectsDao);
+});
+
+final projectRepoProvider = Provider<ProjectsRepoImpl>((ref) {
+  return ProjectsRepoImpl(
+    remote: ref.watch(projectRemoteDataSourceProvider),
+    local: ref.watch(projectLocalDataSourceProvider),
+    connectivity: ref.watch(connectivityServiceProvider),
+  );
+});
 final createProjectUsecase = Provider<CreateProjectUseCase>((ref) {
   final projectRepo = ref.watch(projectRepoProvider);
   return CreateProjectUseCase(projectsRepo: projectRepo);
@@ -35,9 +51,8 @@ final getProjectsUseCase = Provider<GetAllProjectsUseCase>((ref) {
 final searchQueryProvider = StateProvider<String>((ref) => '');
 
 final filteredProjectsProvider = Provider<List<ProjectModel>>((ref) {
-  final allProjects = ref.watch(projectsListProvider).value ?? [];
+  final allProjects = ref.watch(projectsListProvider).value?.projects ?? [];
   final query = ref.watch(searchQueryProvider).trim().toLowerCase();
-
   if (query.isEmpty) return allProjects;
   return allProjects
       .where((p) => p.name.toLowerCase().contains(query))
@@ -45,7 +60,7 @@ final filteredProjectsProvider = Provider<List<ProjectModel>>((ref) {
 });
 
 final projectsPageDataProvider = Provider<ProjectsPageData>((ref) {
-  final allProjects = ref.watch(projectsListProvider).value ?? [];
+  final allProjects = ref.watch(projectsListProvider).value?.projects ?? [];
   final filtered = ref.watch(filteredProjectsProvider);
   final currentPage = ref.watch(projectsPaginationProvider);
 
