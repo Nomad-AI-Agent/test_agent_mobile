@@ -11,7 +11,7 @@ class RunSteps extends Table {
   IntColumn get stepIndex => integer().nullable()();
   TextColumn get action => text().nullable()();
   TextColumn get description => text().nullable()();
-  TextColumn get status => text().nullable()(); // raw string, same as Runs
+  TextColumn get status => text().nullable()(); 
   IntColumn get durationMs => integer().nullable()();
   TextColumn get error => text().nullable()();
   TextColumn get target => text().nullable()();

@@ -3,14 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:test_agent_mobile/core/network/api_service.dart' as _i3;
+import 'package:test_agent_mobile/core/network/api_service.dart' as _i4;
+import 'package:test_agent_mobile/core/run/data/models/runs/latest_run_model.dart'
+    as _i7;
 import 'package:test_agent_mobile/features/auth/data/models/login/login_response_model.dart'
     as _i2;
+import 'package:test_agent_mobile/features/dashboard/data/models/dashboard_status_model.dart'
+    as _i3;
 import 'package:test_agent_mobile/features/projects/data/models/project_model.dart'
-    as _i5;
+    as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -33,52 +37,89 @@ class _FakeLoginResponseModel_0 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
+class _FakeDashboardStatusModel_1 extends _i1.SmartFake
+    implements _i3.DashboardStatusModel {
+  _FakeDashboardStatusModel_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [ApiService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiService extends _i1.Mock implements _i3.ApiService {
+class MockApiService extends _i1.Mock implements _i4.ApiService {
   MockApiService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.LoginResponseModel> login(Map<String, dynamic>? body) =>
+  _i5.Future<_i2.LoginResponseModel> login(Map<String, dynamic>? body) =>
       (super.noSuchMethod(
             Invocation.method(#login, [body]),
-            returnValue: _i4.Future<_i2.LoginResponseModel>.value(
+            returnValue: _i5.Future<_i2.LoginResponseModel>.value(
               _FakeLoginResponseModel_0(
                 this,
                 Invocation.method(#login, [body]),
               ),
             ),
           )
-          as _i4.Future<_i2.LoginResponseModel>);
+          as _i5.Future<_i2.LoginResponseModel>);
 
   @override
-  _i4.Future<void> register(Map<String, dynamic>? body) =>
+  _i5.Future<void> register(Map<String, dynamic>? body) =>
       (super.noSuchMethod(
             Invocation.method(#register, [body]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
           )
-          as _i4.Future<void>);
+          as _i5.Future<void>);
 
   @override
-  _i4.Future<List<_i5.ProjectModel>> getProjects() =>
+  _i5.Future<List<_i6.ProjectModel>> getProjects() =>
       (super.noSuchMethod(
             Invocation.method(#getProjects, []),
-            returnValue: _i4.Future<List<_i5.ProjectModel>>.value(
-              <_i5.ProjectModel>[],
+            returnValue: _i5.Future<List<_i6.ProjectModel>>.value(
+              <_i6.ProjectModel>[],
             ),
           )
-          as _i4.Future<List<_i5.ProjectModel>>);
+          as _i5.Future<List<_i6.ProjectModel>>);
 
   @override
-  _i4.Future<void> createProject(Map<String, dynamic>? body) =>
+  _i5.Future<void> createProject(Map<String, dynamic>? body) =>
       (super.noSuchMethod(
             Invocation.method(#createProject, [body]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
           )
-          as _i4.Future<void>);
+          as _i5.Future<void>);
+
+  @override
+  _i5.Future<_i3.DashboardStatusModel> getDashboardStatus() =>
+      (super.noSuchMethod(
+            Invocation.method(#getDashboardStatus, []),
+            returnValue: _i5.Future<_i3.DashboardStatusModel>.value(
+              _FakeDashboardStatusModel_1(
+                this,
+                Invocation.method(#getDashboardStatus, []),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.DashboardStatusModel>);
+
+  @override
+  _i5.Future<List<_i7.LatestRunModel>> getRuns({
+    String? projectId,
+    int? limit,
+    int? offset,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#getRuns, [], {
+              #projectId: projectId,
+              #limit: limit,
+              #offset: offset,
+            }),
+            returnValue: _i5.Future<List<_i7.LatestRunModel>>.value(
+              <_i7.LatestRunModel>[],
+            ),
+          )
+          as _i5.Future<List<_i7.LatestRunModel>>);
 }

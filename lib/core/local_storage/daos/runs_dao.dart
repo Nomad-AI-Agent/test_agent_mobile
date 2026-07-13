@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:test_agent_mobile/core/local_storage/app_database.dart';
-import 'package:test_agent_mobile/core/local_storage/tables/run_strps_table.dart';
+import 'package:test_agent_mobile/core/local_storage/tables/run_steps_table.dart';
 import 'package:test_agent_mobile/core/local_storage/tables/run_targets_table.dart';
 import 'package:test_agent_mobile/core/local_storage/tables/runs_table.dart';
 
@@ -67,4 +67,17 @@ class RunsDao extends DatabaseAccessor<AppDatabase> with _$RunsDaoMixin {
   }
 
   Future<void> clearAll() => delete(runs).go();
+
+  Future<List<Run>> getAll() {
+  return (select(runs)
+        ..orderBy([(t) => OrderingTerm.desc(t.createdAt)]))
+      .get();
+}
+
+Future<List<Run>> getLatest(int limit) {
+  return (select(runs)
+        ..orderBy([(t) => OrderingTerm.desc(t.createdAt)])
+        ..limit(limit))
+      .get();
+}
 }

@@ -6,7 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:test_agent_mobile/core/local_storage/daos/projects_dao.dart';
 import 'package:test_agent_mobile/core/local_storage/daos/runs_dao.dart';
-import 'package:test_agent_mobile/core/local_storage/tables/run_strps_table.dart';
+import 'package:test_agent_mobile/core/local_storage/tables/run_steps_table.dart';
 
 import 'tables/projects_table.dart';
 import 'tables/runs_table.dart';
