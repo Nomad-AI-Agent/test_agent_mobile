@@ -3,14 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_agent_mobile/core/styles/app_colors.dart';
 
 class SequenceMetaRow extends StatelessWidget {
-  final String id;
   final String url;
-
+  final int passedSteps;
+  final int failedSteps;
 
   const SequenceMetaRow({
     super.key,
-    required this.id,
     required this.url,
+    required this.passedSteps,
+    required this.failedSteps,
   });
 
   Widget _metaChip(IconData icon, String text) {
@@ -34,15 +35,8 @@ class SequenceMetaRow extends StatelessWidget {
       runSpacing: 4.h,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Text(
-          id,
-          style: TextStyle(
-            fontSize: 11.sp,
-            fontFamily: "monospace",
-            color: AppColorsLight.textMuted,
-          ),
-        ),
         _metaChip(Icons.link, url),
+        _metaChip(Icons.checklist_rtl, "${passedSteps}p / ${failedSteps}f"),
       ],
     );
   }

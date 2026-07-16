@@ -12,7 +12,6 @@ class SequenceCard extends StatelessWidget {
 
   const SequenceCard({super.key, required this.sequence, this.onTap});
 
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -52,7 +51,11 @@ class SequenceCard extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 6.h),
-                            SequenceMetaRow(id: sequence.id, url: sequence.url),
+                            SequenceMetaRow(
+                              passedSteps: sequence.passedSteps,
+                              failedSteps: sequence.failedSteps,
+                              url: sequence.url,
+                            ),
                           ],
                         ),
                       ),

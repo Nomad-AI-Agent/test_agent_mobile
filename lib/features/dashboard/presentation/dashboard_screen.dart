@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_agent_mobile/core/styles/app_colors.dart';
 import 'package:test_agent_mobile/core/widgets/error_state_view.dart';
-import 'package:test_agent_mobile/features/dashboard/domain/entity/sequence_item.dart';
+import 'package:test_agent_mobile/features/dashboard/data/mapper/run_to_sequence_mapper.dart';
 import 'package:test_agent_mobile/features/dashboard/domain/entity/stat_item.dart';
 import 'package:test_agent_mobile/features/dashboard/presentation/logic/dashboard_notifier.dart';
+import 'package:test_agent_mobile/features/dashboard/presentation/logic/latest_run_notifier.dart';
 import 'package:test_agent_mobile/features/dashboard/presentation/widgets/dashboard_header.dart';
 import 'package:test_agent_mobile/features/dashboard/presentation/widgets/sequence_card.dart';
 import 'package:test_agent_mobile/features/dashboard/presentation/widgets/stats_grid.dart';
@@ -16,6 +17,7 @@ class DashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardState = ref.watch(dashboardProvider);
+    final latestRunsState = ref.watch(latestRunsProvider);
 
     return Scaffold(
       backgroundColor: AppColorsLight.surface,
@@ -63,19 +65,38 @@ class DashboardScreen extends ConsumerWidget {
                     ),
                   ),
                   SizedBox(height: 12.h),
-                  SequenceCard(
-                    sequence: SequenceItem(
-                      id: "c5d5df56",
-                      title:
-                          "user asks about thinktree will see text input area put in it the search keyword and submit it",
-                      url: "https://chatgpt.com/",
-                      timestamp: DateTime(2026, 6, 28, 22, 40, 13),
-                      durationSeconds: 195.8,
-                      passedSteps: 13,
-                      failedSteps: 0,
-                      status: SequenceStatus.pass,
+                  latestRunsState.when(
+                    loading: () => const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 24),
+                      child: Center(child: CircularProgressIndicator()),
                     ),
-                    onTap: () {},
+                    error: (err, _) => ErrorStateView(
+                      error: err,
+                      onRetry: () =>
+                          ref.read(latestRunsProvider.notifier).refresh(),
+                    ),
+                    data: (runsResult) {
+                      final runs = runsResult.runs;
+                      if (runs.isEmpty) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 24),
+                          child: Center(child: Text('No runs yet.')),
+                        );
+                      }
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: runs.length > 5 ? 5 : runs.length,
+                        separatorBuilder: (_, _) => SizedBox(height: 10.h),
+                        itemBuilder: (context, index) {
+                          final run = runs[index];
+                          return SequenceCard(
+                            sequence: run.toSequenceItem(),
+                            onTap: () {},
+                          );
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
