@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RunTargetModel {
 
- String get url; String get role;
+ String get url; String? get role;
 /// Create a copy of RunTargetModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $RunTargetModelCopyWith<$Res>  {
   factory $RunTargetModelCopyWith(RunTargetModel value, $Res Function(RunTargetModel) _then) = _$RunTargetModelCopyWithImpl;
 @useResult
 $Res call({
- String url, String role
+ String url, String? role
 });
 
 
@@ -65,11 +65,11 @@ class _$RunTargetModelCopyWithImpl<$Res>
 
 /// Create a copy of RunTargetModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? url = null,Object? role = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? url = null,Object? role = freezed,}) {
   return _then(_self.copyWith(
 url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
-as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as String,
+as String,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -154,7 +154,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String url,  String role)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String url,  String? role)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RunTargetModel() when $default != null:
 return $default(_that.url,_that.role);case _:
@@ -175,7 +175,7 @@ return $default(_that.url,_that.role);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String url,  String role)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String url,  String? role)  $default,) {final _that = this;
 switch (_that) {
 case _RunTargetModel():
 return $default(_that.url,_that.role);case _:
@@ -195,7 +195,7 @@ return $default(_that.url,_that.role);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String url,  String role)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String url,  String? role)?  $default,) {final _that = this;
 switch (_that) {
 case _RunTargetModel() when $default != null:
 return $default(_that.url,_that.role);case _:
@@ -210,11 +210,11 @@ return $default(_that.url,_that.role);case _:
 @JsonSerializable()
 
 class _RunTargetModel implements RunTargetModel {
-  const _RunTargetModel({required this.url, required this.role});
+  const _RunTargetModel({required this.url, this.role});
   factory _RunTargetModel.fromJson(Map<String, dynamic> json) => _$RunTargetModelFromJson(json);
 
 @override final  String url;
-@override final  String role;
+@override final  String? role;
 
 /// Create a copy of RunTargetModel
 /// with the given fields replaced by the non-null parameter values.
@@ -249,7 +249,7 @@ abstract mixin class _$RunTargetModelCopyWith<$Res> implements $RunTargetModelCo
   factory _$RunTargetModelCopyWith(_RunTargetModel value, $Res Function(_RunTargetModel) _then) = __$RunTargetModelCopyWithImpl;
 @override @useResult
 $Res call({
- String url, String role
+ String url, String? role
 });
 
 
@@ -266,11 +266,11 @@ class __$RunTargetModelCopyWithImpl<$Res>
 
 /// Create a copy of RunTargetModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? url = null,Object? role = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? url = null,Object? role = freezed,}) {
   return _then(_RunTargetModel(
 url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
-as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as String,
+as String,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

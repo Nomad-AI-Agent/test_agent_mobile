@@ -64,29 +64,6 @@ class RunRepoImpl extends RunRepo {
     );
   }
 
-  @override
-  Future<RunsResult> getLatestRuns(int limit) async {
-    final hasConnection = await connectivity.isConnected;
-    if (!hasConnection) {
-      return _fromCacheOrThrow(() => local.getLatest(limit));
-    }
-
-    final result = await remote.getLatestRunByLimit(limit);
-    return result.when(
-      onSuccess: (data) async {
-        await local.cacheRuns(data);
-        return RunsResult(runs: data, source: RunsSource.network);
-      },
-      onError: (error) async {
-        final cached = await local.getLatest(limit);
-        if (cached.isNotEmpty) {
-          return RunsResult(runs: cached, source: RunsSource.cache);
-        }
-        throw ApiException(error);
-      },
-    );
-  }
-
   Future<RunsResult> _fromCacheOrThrow(
     Future<List<dynamic>> Function() getCached,
   ) async {

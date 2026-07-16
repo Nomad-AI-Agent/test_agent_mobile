@@ -3,17 +3,28 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'run_step_model.freezed.dart';
 part 'run_step_model.g.dart';
 
+class DynamicToStringConverter implements JsonConverter<String?, dynamic> {
+  const DynamicToStringConverter();
+
+  @override
+  String? fromJson(dynamic json) => json?.toString();
+
+  @override
+  dynamic toJson(String? object) => object;
+}
+
 @freezed
- abstract class RunStepModel with _$RunStepModel {
+abstract class RunStepModel with _$RunStepModel {
   const factory RunStepModel({
-    required int index,
-    required String action,
-    required String description,
-    required String target,
-    String? value,
-    required String status,
+    @JsonKey(name: 'step_index') int? stepIndex,
+    int? index,
+    String? action,
+    String? description,
+    String? status,
+    @JsonKey(name: 'duration_ms') int? durationMs,
     String? error,
-    @JsonKey(name: 'duration_ms') required int durationMs,
+    String? target,
+    @DynamicToStringConverter() String? value,
     String? screenshot,
     @JsonKey(name: 'target_index') int? targetIndex,
   }) = _RunStepModel;

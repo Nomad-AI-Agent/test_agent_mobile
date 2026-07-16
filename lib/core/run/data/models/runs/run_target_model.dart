@@ -4,10 +4,10 @@ part 'run_target_model.freezed.dart';
 part 'run_target_model.g.dart';
 
 @freezed
- abstract class RunTargetModel with _$RunTargetModel {
+abstract class RunTargetModel with _$RunTargetModel {
   const factory RunTargetModel({
     required String url,
-    required String role,
+    String? role,         
   }) = _RunTargetModel;
 
   factory RunTargetModel.fromJson(Map<String, dynamic> json) =>

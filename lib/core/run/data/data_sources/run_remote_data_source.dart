@@ -8,7 +8,6 @@ abstract class RunRemoteDataSource {
   Future<ApiResult<List<LatestRunModel>>> getALlRunByProjectId(
     String projectId,
   );
-  Future<ApiResult<List<LatestRunModel>>> getLatestRunByLimit(int limit);
 }
 
 class RunRemoteDataSourceImpl extends RunRemoteDataSource {
@@ -32,16 +31,6 @@ class RunRemoteDataSourceImpl extends RunRemoteDataSource {
   ) async {
     try {
       final response = await apiService.getRuns(projectId: projectId);
-      return ApiResult.success(response);
-    } catch (e) {
-      return ApiResult.error(ApiErrorHandler.handle(e));
-    }
-  }
-
-  @override
-  Future<ApiResult<List<LatestRunModel>>> getLatestRunByLimit(int limit) async {
-    try {
-      final response = await apiService.getRuns(limit: limit);
       return ApiResult.success(response);
     } catch (e) {
       return ApiResult.error(ApiErrorHandler.handle(e));

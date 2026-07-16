@@ -15,7 +15,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LatestRunModel {
 
- String get id;@JsonKey(name: 'user_id') String get userId;@JsonKey(name: 'project_id') String get projectId; List<RunTargetModel> get targets; String get url; String get story;@JsonKey(name: 'created_at') int get createdAt;@JsonKey(name: 'created_at_seconds') double get createdAtSeconds;@JsonKey(name: 'created_at_iso') String get createdAtIso;@JsonKey(name: 'overall_status') String get overallStatus;@JsonKey(name: 'goal_achieved') bool get goalAchieved; bool get canceled;@JsonKey(name: 'cancel_reason') String? get cancelReason; bool get paused; int get passed; int get failed;@JsonKey(name: 'total_duration_ms') int get totalDurationMs; String get summary;@JsonKey(name: 'video_url') String get videoUrl; List<RunStepModel> get steps;
+ String get id;@JsonKey(name: 'user_id') String? get userId;@JsonKey(name: 'project_id') String? get projectId; List<RunTargetModel>? get targets; String get url; String get story;@JsonKey(name: 'created_at') int get createdAt;// ⚠️ TS بيقول string مش int!
+@JsonKey(name: 'created_at_seconds') double? get createdAtSeconds;@JsonKey(name: 'created_at_iso') String? get createdAtIso;@JsonKey(name: 'overall_status') String get overallStatus;@JsonKey(name: 'goal_achieved') bool? get goalAchieved; bool? get canceled;@JsonKey(name: 'cancel_reason') String? get cancelReason; bool? get paused; int? get passed; int? get failed;@JsonKey(name: 'total_duration_ms') int? get totalDurationMs; String? get summary;@JsonKey(name: 'video_url') String? get videoUrl; List<RunStepModel>? get steps;
 /// Create a copy of LatestRunModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +49,7 @@ abstract mixin class $LatestRunModelCopyWith<$Res>  {
   factory $LatestRunModelCopyWith(LatestRunModel value, $Res Function(LatestRunModel) _then) = _$LatestRunModelCopyWithImpl;
 @useResult
 $Res call({
- String id,@JsonKey(name: 'user_id') String userId,@JsonKey(name: 'project_id') String projectId, List<RunTargetModel> targets, String url, String story,@JsonKey(name: 'created_at') int createdAt,@JsonKey(name: 'created_at_seconds') double createdAtSeconds,@JsonKey(name: 'created_at_iso') String createdAtIso,@JsonKey(name: 'overall_status') String overallStatus,@JsonKey(name: 'goal_achieved') bool goalAchieved, bool canceled,@JsonKey(name: 'cancel_reason') String? cancelReason, bool paused, int passed, int failed,@JsonKey(name: 'total_duration_ms') int totalDurationMs, String summary,@JsonKey(name: 'video_url') String videoUrl, List<RunStepModel> steps
+ String id,@JsonKey(name: 'user_id') String? userId,@JsonKey(name: 'project_id') String? projectId, List<RunTargetModel>? targets, String url, String story,@JsonKey(name: 'created_at') int createdAt,@JsonKey(name: 'created_at_seconds') double? createdAtSeconds,@JsonKey(name: 'created_at_iso') String? createdAtIso,@JsonKey(name: 'overall_status') String overallStatus,@JsonKey(name: 'goal_achieved') bool? goalAchieved, bool? canceled,@JsonKey(name: 'cancel_reason') String? cancelReason, bool? paused, int? passed, int? failed,@JsonKey(name: 'total_duration_ms') int? totalDurationMs, String? summary,@JsonKey(name: 'video_url') String? videoUrl, List<RunStepModel>? steps
 });
 
 
@@ -65,29 +66,29 @@ class _$LatestRunModelCopyWithImpl<$Res>
 
 /// Create a copy of LatestRunModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? projectId = null,Object? targets = null,Object? url = null,Object? story = null,Object? createdAt = null,Object? createdAtSeconds = null,Object? createdAtIso = null,Object? overallStatus = null,Object? goalAchieved = null,Object? canceled = null,Object? cancelReason = freezed,Object? paused = null,Object? passed = null,Object? failed = null,Object? totalDurationMs = null,Object? summary = null,Object? videoUrl = null,Object? steps = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = freezed,Object? projectId = freezed,Object? targets = freezed,Object? url = null,Object? story = null,Object? createdAt = null,Object? createdAtSeconds = freezed,Object? createdAtIso = freezed,Object? overallStatus = null,Object? goalAchieved = freezed,Object? canceled = freezed,Object? cancelReason = freezed,Object? paused = freezed,Object? passed = freezed,Object? failed = freezed,Object? totalDurationMs = freezed,Object? summary = freezed,Object? videoUrl = freezed,Object? steps = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,projectId: null == projectId ? _self.projectId : projectId // ignore: cast_nullable_to_non_nullable
-as String,targets: null == targets ? _self.targets : targets // ignore: cast_nullable_to_non_nullable
-as List<RunTargetModel>,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as String,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,projectId: freezed == projectId ? _self.projectId : projectId // ignore: cast_nullable_to_non_nullable
+as String?,targets: freezed == targets ? _self.targets : targets // ignore: cast_nullable_to_non_nullable
+as List<RunTargetModel>?,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String,story: null == story ? _self.story : story // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as int,createdAtSeconds: null == createdAtSeconds ? _self.createdAtSeconds : createdAtSeconds // ignore: cast_nullable_to_non_nullable
-as double,createdAtIso: null == createdAtIso ? _self.createdAtIso : createdAtIso // ignore: cast_nullable_to_non_nullable
-as String,overallStatus: null == overallStatus ? _self.overallStatus : overallStatus // ignore: cast_nullable_to_non_nullable
-as String,goalAchieved: null == goalAchieved ? _self.goalAchieved : goalAchieved // ignore: cast_nullable_to_non_nullable
-as bool,canceled: null == canceled ? _self.canceled : canceled // ignore: cast_nullable_to_non_nullable
-as bool,cancelReason: freezed == cancelReason ? _self.cancelReason : cancelReason // ignore: cast_nullable_to_non_nullable
-as String?,paused: null == paused ? _self.paused : paused // ignore: cast_nullable_to_non_nullable
-as bool,passed: null == passed ? _self.passed : passed // ignore: cast_nullable_to_non_nullable
-as int,failed: null == failed ? _self.failed : failed // ignore: cast_nullable_to_non_nullable
-as int,totalDurationMs: null == totalDurationMs ? _self.totalDurationMs : totalDurationMs // ignore: cast_nullable_to_non_nullable
-as int,summary: null == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
-as String,videoUrl: null == videoUrl ? _self.videoUrl : videoUrl // ignore: cast_nullable_to_non_nullable
-as String,steps: null == steps ? _self.steps : steps // ignore: cast_nullable_to_non_nullable
-as List<RunStepModel>,
+as int,createdAtSeconds: freezed == createdAtSeconds ? _self.createdAtSeconds : createdAtSeconds // ignore: cast_nullable_to_non_nullable
+as double?,createdAtIso: freezed == createdAtIso ? _self.createdAtIso : createdAtIso // ignore: cast_nullable_to_non_nullable
+as String?,overallStatus: null == overallStatus ? _self.overallStatus : overallStatus // ignore: cast_nullable_to_non_nullable
+as String,goalAchieved: freezed == goalAchieved ? _self.goalAchieved : goalAchieved // ignore: cast_nullable_to_non_nullable
+as bool?,canceled: freezed == canceled ? _self.canceled : canceled // ignore: cast_nullable_to_non_nullable
+as bool?,cancelReason: freezed == cancelReason ? _self.cancelReason : cancelReason // ignore: cast_nullable_to_non_nullable
+as String?,paused: freezed == paused ? _self.paused : paused // ignore: cast_nullable_to_non_nullable
+as bool?,passed: freezed == passed ? _self.passed : passed // ignore: cast_nullable_to_non_nullable
+as int?,failed: freezed == failed ? _self.failed : failed // ignore: cast_nullable_to_non_nullable
+as int?,totalDurationMs: freezed == totalDurationMs ? _self.totalDurationMs : totalDurationMs // ignore: cast_nullable_to_non_nullable
+as int?,summary: freezed == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
+as String?,videoUrl: freezed == videoUrl ? _self.videoUrl : videoUrl // ignore: cast_nullable_to_non_nullable
+as String?,steps: freezed == steps ? _self.steps : steps // ignore: cast_nullable_to_non_nullable
+as List<RunStepModel>?,
   ));
 }
 
@@ -172,7 +173,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'user_id')  String userId, @JsonKey(name: 'project_id')  String projectId,  List<RunTargetModel> targets,  String url,  String story, @JsonKey(name: 'created_at')  int createdAt, @JsonKey(name: 'created_at_seconds')  double createdAtSeconds, @JsonKey(name: 'created_at_iso')  String createdAtIso, @JsonKey(name: 'overall_status')  String overallStatus, @JsonKey(name: 'goal_achieved')  bool goalAchieved,  bool canceled, @JsonKey(name: 'cancel_reason')  String? cancelReason,  bool paused,  int passed,  int failed, @JsonKey(name: 'total_duration_ms')  int totalDurationMs,  String summary, @JsonKey(name: 'video_url')  String videoUrl,  List<RunStepModel> steps)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'user_id')  String? userId, @JsonKey(name: 'project_id')  String? projectId,  List<RunTargetModel>? targets,  String url,  String story, @JsonKey(name: 'created_at')  int createdAt, @JsonKey(name: 'created_at_seconds')  double? createdAtSeconds, @JsonKey(name: 'created_at_iso')  String? createdAtIso, @JsonKey(name: 'overall_status')  String overallStatus, @JsonKey(name: 'goal_achieved')  bool? goalAchieved,  bool? canceled, @JsonKey(name: 'cancel_reason')  String? cancelReason,  bool? paused,  int? passed,  int? failed, @JsonKey(name: 'total_duration_ms')  int? totalDurationMs,  String? summary, @JsonKey(name: 'video_url')  String? videoUrl,  List<RunStepModel>? steps)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LatestRunModel() when $default != null:
 return $default(_that.id,_that.userId,_that.projectId,_that.targets,_that.url,_that.story,_that.createdAt,_that.createdAtSeconds,_that.createdAtIso,_that.overallStatus,_that.goalAchieved,_that.canceled,_that.cancelReason,_that.paused,_that.passed,_that.failed,_that.totalDurationMs,_that.summary,_that.videoUrl,_that.steps);case _:
@@ -193,7 +194,7 @@ return $default(_that.id,_that.userId,_that.projectId,_that.targets,_that.url,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'user_id')  String userId, @JsonKey(name: 'project_id')  String projectId,  List<RunTargetModel> targets,  String url,  String story, @JsonKey(name: 'created_at')  int createdAt, @JsonKey(name: 'created_at_seconds')  double createdAtSeconds, @JsonKey(name: 'created_at_iso')  String createdAtIso, @JsonKey(name: 'overall_status')  String overallStatus, @JsonKey(name: 'goal_achieved')  bool goalAchieved,  bool canceled, @JsonKey(name: 'cancel_reason')  String? cancelReason,  bool paused,  int passed,  int failed, @JsonKey(name: 'total_duration_ms')  int totalDurationMs,  String summary, @JsonKey(name: 'video_url')  String videoUrl,  List<RunStepModel> steps)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'user_id')  String? userId, @JsonKey(name: 'project_id')  String? projectId,  List<RunTargetModel>? targets,  String url,  String story, @JsonKey(name: 'created_at')  int createdAt, @JsonKey(name: 'created_at_seconds')  double? createdAtSeconds, @JsonKey(name: 'created_at_iso')  String? createdAtIso, @JsonKey(name: 'overall_status')  String overallStatus, @JsonKey(name: 'goal_achieved')  bool? goalAchieved,  bool? canceled, @JsonKey(name: 'cancel_reason')  String? cancelReason,  bool? paused,  int? passed,  int? failed, @JsonKey(name: 'total_duration_ms')  int? totalDurationMs,  String? summary, @JsonKey(name: 'video_url')  String? videoUrl,  List<RunStepModel>? steps)  $default,) {final _that = this;
 switch (_that) {
 case _LatestRunModel():
 return $default(_that.id,_that.userId,_that.projectId,_that.targets,_that.url,_that.story,_that.createdAt,_that.createdAtSeconds,_that.createdAtIso,_that.overallStatus,_that.goalAchieved,_that.canceled,_that.cancelReason,_that.paused,_that.passed,_that.failed,_that.totalDurationMs,_that.summary,_that.videoUrl,_that.steps);case _:
@@ -213,7 +214,7 @@ return $default(_that.id,_that.userId,_that.projectId,_that.targets,_that.url,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'user_id')  String userId, @JsonKey(name: 'project_id')  String projectId,  List<RunTargetModel> targets,  String url,  String story, @JsonKey(name: 'created_at')  int createdAt, @JsonKey(name: 'created_at_seconds')  double createdAtSeconds, @JsonKey(name: 'created_at_iso')  String createdAtIso, @JsonKey(name: 'overall_status')  String overallStatus, @JsonKey(name: 'goal_achieved')  bool goalAchieved,  bool canceled, @JsonKey(name: 'cancel_reason')  String? cancelReason,  bool paused,  int passed,  int failed, @JsonKey(name: 'total_duration_ms')  int totalDurationMs,  String summary, @JsonKey(name: 'video_url')  String videoUrl,  List<RunStepModel> steps)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'user_id')  String? userId, @JsonKey(name: 'project_id')  String? projectId,  List<RunTargetModel>? targets,  String url,  String story, @JsonKey(name: 'created_at')  int createdAt, @JsonKey(name: 'created_at_seconds')  double? createdAtSeconds, @JsonKey(name: 'created_at_iso')  String? createdAtIso, @JsonKey(name: 'overall_status')  String overallStatus, @JsonKey(name: 'goal_achieved')  bool? goalAchieved,  bool? canceled, @JsonKey(name: 'cancel_reason')  String? cancelReason,  bool? paused,  int? passed,  int? failed, @JsonKey(name: 'total_duration_ms')  int? totalDurationMs,  String? summary, @JsonKey(name: 'video_url')  String? videoUrl,  List<RunStepModel>? steps)?  $default,) {final _that = this;
 switch (_that) {
 case _LatestRunModel() when $default != null:
 return $default(_that.id,_that.userId,_that.projectId,_that.targets,_that.url,_that.story,_that.createdAt,_that.createdAtSeconds,_that.createdAtIso,_that.overallStatus,_that.goalAchieved,_that.canceled,_that.cancelReason,_that.paused,_that.passed,_that.failed,_that.totalDurationMs,_that.summary,_that.videoUrl,_that.steps);case _:
@@ -228,39 +229,44 @@ return $default(_that.id,_that.userId,_that.projectId,_that.targets,_that.url,_t
 @JsonSerializable()
 
 class _LatestRunModel implements LatestRunModel {
-  const _LatestRunModel({required this.id, @JsonKey(name: 'user_id') required this.userId, @JsonKey(name: 'project_id') required this.projectId, required final  List<RunTargetModel> targets, required this.url, required this.story, @JsonKey(name: 'created_at') required this.createdAt, @JsonKey(name: 'created_at_seconds') required this.createdAtSeconds, @JsonKey(name: 'created_at_iso') required this.createdAtIso, @JsonKey(name: 'overall_status') required this.overallStatus, @JsonKey(name: 'goal_achieved') required this.goalAchieved, required this.canceled, @JsonKey(name: 'cancel_reason') this.cancelReason, required this.paused, required this.passed, required this.failed, @JsonKey(name: 'total_duration_ms') required this.totalDurationMs, required this.summary, @JsonKey(name: 'video_url') required this.videoUrl, required final  List<RunStepModel> steps}): _targets = targets,_steps = steps;
+  const _LatestRunModel({required this.id, @JsonKey(name: 'user_id') this.userId, @JsonKey(name: 'project_id') this.projectId, final  List<RunTargetModel>? targets, required this.url, required this.story, @JsonKey(name: 'created_at') required this.createdAt, @JsonKey(name: 'created_at_seconds') this.createdAtSeconds, @JsonKey(name: 'created_at_iso') this.createdAtIso, @JsonKey(name: 'overall_status') required this.overallStatus, @JsonKey(name: 'goal_achieved') this.goalAchieved, this.canceled, @JsonKey(name: 'cancel_reason') this.cancelReason, this.paused, this.passed, this.failed, @JsonKey(name: 'total_duration_ms') this.totalDurationMs, this.summary, @JsonKey(name: 'video_url') this.videoUrl, final  List<RunStepModel>? steps}): _targets = targets,_steps = steps;
   factory _LatestRunModel.fromJson(Map<String, dynamic> json) => _$LatestRunModelFromJson(json);
 
 @override final  String id;
-@override@JsonKey(name: 'user_id') final  String userId;
-@override@JsonKey(name: 'project_id') final  String projectId;
- final  List<RunTargetModel> _targets;
-@override List<RunTargetModel> get targets {
+@override@JsonKey(name: 'user_id') final  String? userId;
+@override@JsonKey(name: 'project_id') final  String? projectId;
+ final  List<RunTargetModel>? _targets;
+@override List<RunTargetModel>? get targets {
+  final value = _targets;
+  if (value == null) return null;
   if (_targets is EqualUnmodifiableListView) return _targets;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_targets);
+  return EqualUnmodifiableListView(value);
 }
 
 @override final  String url;
 @override final  String story;
 @override@JsonKey(name: 'created_at') final  int createdAt;
-@override@JsonKey(name: 'created_at_seconds') final  double createdAtSeconds;
-@override@JsonKey(name: 'created_at_iso') final  String createdAtIso;
+// ⚠️ TS بيقول string مش int!
+@override@JsonKey(name: 'created_at_seconds') final  double? createdAtSeconds;
+@override@JsonKey(name: 'created_at_iso') final  String? createdAtIso;
 @override@JsonKey(name: 'overall_status') final  String overallStatus;
-@override@JsonKey(name: 'goal_achieved') final  bool goalAchieved;
-@override final  bool canceled;
+@override@JsonKey(name: 'goal_achieved') final  bool? goalAchieved;
+@override final  bool? canceled;
 @override@JsonKey(name: 'cancel_reason') final  String? cancelReason;
-@override final  bool paused;
-@override final  int passed;
-@override final  int failed;
-@override@JsonKey(name: 'total_duration_ms') final  int totalDurationMs;
-@override final  String summary;
-@override@JsonKey(name: 'video_url') final  String videoUrl;
- final  List<RunStepModel> _steps;
-@override List<RunStepModel> get steps {
+@override final  bool? paused;
+@override final  int? passed;
+@override final  int? failed;
+@override@JsonKey(name: 'total_duration_ms') final  int? totalDurationMs;
+@override final  String? summary;
+@override@JsonKey(name: 'video_url') final  String? videoUrl;
+ final  List<RunStepModel>? _steps;
+@override List<RunStepModel>? get steps {
+  final value = _steps;
+  if (value == null) return null;
   if (_steps is EqualUnmodifiableListView) return _steps;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_steps);
+  return EqualUnmodifiableListView(value);
 }
 
 
@@ -297,7 +303,7 @@ abstract mixin class _$LatestRunModelCopyWith<$Res> implements $LatestRunModelCo
   factory _$LatestRunModelCopyWith(_LatestRunModel value, $Res Function(_LatestRunModel) _then) = __$LatestRunModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(name: 'user_id') String userId,@JsonKey(name: 'project_id') String projectId, List<RunTargetModel> targets, String url, String story,@JsonKey(name: 'created_at') int createdAt,@JsonKey(name: 'created_at_seconds') double createdAtSeconds,@JsonKey(name: 'created_at_iso') String createdAtIso,@JsonKey(name: 'overall_status') String overallStatus,@JsonKey(name: 'goal_achieved') bool goalAchieved, bool canceled,@JsonKey(name: 'cancel_reason') String? cancelReason, bool paused, int passed, int failed,@JsonKey(name: 'total_duration_ms') int totalDurationMs, String summary,@JsonKey(name: 'video_url') String videoUrl, List<RunStepModel> steps
+ String id,@JsonKey(name: 'user_id') String? userId,@JsonKey(name: 'project_id') String? projectId, List<RunTargetModel>? targets, String url, String story,@JsonKey(name: 'created_at') int createdAt,@JsonKey(name: 'created_at_seconds') double? createdAtSeconds,@JsonKey(name: 'created_at_iso') String? createdAtIso,@JsonKey(name: 'overall_status') String overallStatus,@JsonKey(name: 'goal_achieved') bool? goalAchieved, bool? canceled,@JsonKey(name: 'cancel_reason') String? cancelReason, bool? paused, int? passed, int? failed,@JsonKey(name: 'total_duration_ms') int? totalDurationMs, String? summary,@JsonKey(name: 'video_url') String? videoUrl, List<RunStepModel>? steps
 });
 
 
@@ -314,29 +320,29 @@ class __$LatestRunModelCopyWithImpl<$Res>
 
 /// Create a copy of LatestRunModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? projectId = null,Object? targets = null,Object? url = null,Object? story = null,Object? createdAt = null,Object? createdAtSeconds = null,Object? createdAtIso = null,Object? overallStatus = null,Object? goalAchieved = null,Object? canceled = null,Object? cancelReason = freezed,Object? paused = null,Object? passed = null,Object? failed = null,Object? totalDurationMs = null,Object? summary = null,Object? videoUrl = null,Object? steps = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = freezed,Object? projectId = freezed,Object? targets = freezed,Object? url = null,Object? story = null,Object? createdAt = null,Object? createdAtSeconds = freezed,Object? createdAtIso = freezed,Object? overallStatus = null,Object? goalAchieved = freezed,Object? canceled = freezed,Object? cancelReason = freezed,Object? paused = freezed,Object? passed = freezed,Object? failed = freezed,Object? totalDurationMs = freezed,Object? summary = freezed,Object? videoUrl = freezed,Object? steps = freezed,}) {
   return _then(_LatestRunModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String,projectId: null == projectId ? _self.projectId : projectId // ignore: cast_nullable_to_non_nullable
-as String,targets: null == targets ? _self._targets : targets // ignore: cast_nullable_to_non_nullable
-as List<RunTargetModel>,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as String,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,projectId: freezed == projectId ? _self.projectId : projectId // ignore: cast_nullable_to_non_nullable
+as String?,targets: freezed == targets ? _self._targets : targets // ignore: cast_nullable_to_non_nullable
+as List<RunTargetModel>?,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String,story: null == story ? _self.story : story // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as int,createdAtSeconds: null == createdAtSeconds ? _self.createdAtSeconds : createdAtSeconds // ignore: cast_nullable_to_non_nullable
-as double,createdAtIso: null == createdAtIso ? _self.createdAtIso : createdAtIso // ignore: cast_nullable_to_non_nullable
-as String,overallStatus: null == overallStatus ? _self.overallStatus : overallStatus // ignore: cast_nullable_to_non_nullable
-as String,goalAchieved: null == goalAchieved ? _self.goalAchieved : goalAchieved // ignore: cast_nullable_to_non_nullable
-as bool,canceled: null == canceled ? _self.canceled : canceled // ignore: cast_nullable_to_non_nullable
-as bool,cancelReason: freezed == cancelReason ? _self.cancelReason : cancelReason // ignore: cast_nullable_to_non_nullable
-as String?,paused: null == paused ? _self.paused : paused // ignore: cast_nullable_to_non_nullable
-as bool,passed: null == passed ? _self.passed : passed // ignore: cast_nullable_to_non_nullable
-as int,failed: null == failed ? _self.failed : failed // ignore: cast_nullable_to_non_nullable
-as int,totalDurationMs: null == totalDurationMs ? _self.totalDurationMs : totalDurationMs // ignore: cast_nullable_to_non_nullable
-as int,summary: null == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
-as String,videoUrl: null == videoUrl ? _self.videoUrl : videoUrl // ignore: cast_nullable_to_non_nullable
-as String,steps: null == steps ? _self._steps : steps // ignore: cast_nullable_to_non_nullable
-as List<RunStepModel>,
+as int,createdAtSeconds: freezed == createdAtSeconds ? _self.createdAtSeconds : createdAtSeconds // ignore: cast_nullable_to_non_nullable
+as double?,createdAtIso: freezed == createdAtIso ? _self.createdAtIso : createdAtIso // ignore: cast_nullable_to_non_nullable
+as String?,overallStatus: null == overallStatus ? _self.overallStatus : overallStatus // ignore: cast_nullable_to_non_nullable
+as String,goalAchieved: freezed == goalAchieved ? _self.goalAchieved : goalAchieved // ignore: cast_nullable_to_non_nullable
+as bool?,canceled: freezed == canceled ? _self.canceled : canceled // ignore: cast_nullable_to_non_nullable
+as bool?,cancelReason: freezed == cancelReason ? _self.cancelReason : cancelReason // ignore: cast_nullable_to_non_nullable
+as String?,paused: freezed == paused ? _self.paused : paused // ignore: cast_nullable_to_non_nullable
+as bool?,passed: freezed == passed ? _self.passed : passed // ignore: cast_nullable_to_non_nullable
+as int?,failed: freezed == failed ? _self.failed : failed // ignore: cast_nullable_to_non_nullable
+as int?,totalDurationMs: freezed == totalDurationMs ? _self.totalDurationMs : totalDurationMs // ignore: cast_nullable_to_non_nullable
+as int?,summary: freezed == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
+as String?,videoUrl: freezed == videoUrl ? _self.videoUrl : videoUrl // ignore: cast_nullable_to_non_nullable
+as String?,steps: freezed == steps ? _self._steps : steps // ignore: cast_nullable_to_non_nullable
+as List<RunStepModel>?,
   ));
 }
 

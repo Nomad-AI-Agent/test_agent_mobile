@@ -8,27 +8,29 @@ extension LatestRunModelToDrift on LatestRunModel {
   RunsCompanion toRunsCompanion() {
     return RunsCompanion(
       id: Value(id),
-      projectId: Value(projectId.isEmpty ? null : projectId),
+      projectId: Value(
+        (projectId == null || projectId!.isEmpty) ? null : projectId,
+      ),
       story: Value(story),
       url: Value(url),
       createdAt: Value(
         DateTime.fromMillisecondsSinceEpoch(createdAt, isUtc: true),
       ),
       overallStatus: Value(overallStatus),
-      goalAchieved: Value(goalAchieved),
-      totalDurationMs: Value(totalDurationMs),
-      passed: Value(passed),
-      failed: Value(failed),
-      summary: Value(summary),
-      canceled: Value(canceled),
+      goalAchieved: Value(goalAchieved ?? false),
+      totalDurationMs: Value(totalDurationMs ?? 0),
+      passed: Value(passed ?? 0),
+      failed: Value(failed ?? 0),
+      summary: Value(summary ?? ''),
+      canceled: Value(canceled ?? false),
       cancelReason: Value(cancelReason),
-      paused: Value(paused),
+      paused: Value(paused ?? false),
       cachedAt: Value(DateTime.now()),
     );
   }
 
   List<RunTargetsCompanion> toTargetCompanions() {
-    return targets
+    return (targets ?? [])
         .map(
           (t) => RunTargetsCompanion(
             runId: Value(id),
@@ -40,18 +42,18 @@ extension LatestRunModelToDrift on LatestRunModel {
   }
 
   List<RunStepsCompanion> toStepCompanions() {
-    return steps
+    return (steps ?? [])
         .map(
           (s) => RunStepsCompanion(
             runId: Value(id),
-            stepIndex: Value(s.index),
-            action: Value(s.action),
-            description: Value(s.description),
+            stepIndex: Value(s.index ?? s.stepIndex ?? 0),
+            action: Value(s.action ?? ''),
+            description: Value(s.description ?? ''),
             target: Value(s.target),
             value: Value(s.value),
-            status: Value(s.status),
+            status: Value(s.status ?? ''),
             error: Value(s.error),
-            durationMs: Value(s.durationMs),
+            durationMs: Value(s.durationMs ?? 0),
             screenshotPath: Value(s.screenshot),
             targetIndex: Value(s.targetIndex),
           ),
@@ -70,7 +72,7 @@ extension RunRowToModel on Run {
       userId: '',
       projectId: projectId ?? '',
       targets: targetRows
-          .map((t) => RunTargetModel(url: t.url, role: t.role ?? ''))
+          .map((t) => RunTargetModel(url: t.url, role: t.role))
           .toList(),
       url: url,
       story: story,

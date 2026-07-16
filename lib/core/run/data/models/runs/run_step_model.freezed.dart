@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RunStepModel {
 
- int get index; String get action; String get description; String get target; String? get value; String get status; String? get error;@JsonKey(name: 'duration_ms') int get durationMs; String? get screenshot;@JsonKey(name: 'target_index') int? get targetIndex;
+@JsonKey(name: 'step_index') int? get stepIndex; int? get index; String? get action; String? get description; String? get status;@JsonKey(name: 'duration_ms') int? get durationMs; String? get error; String? get target;@DynamicToStringConverter() String? get value; String? get screenshot;@JsonKey(name: 'target_index') int? get targetIndex;
 /// Create a copy of RunStepModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $RunStepModelCopyWith<RunStepModel> get copyWith => _$RunStepModelCopyWithImpl<R
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RunStepModel&&(identical(other.index, index) || other.index == index)&&(identical(other.action, action) || other.action == action)&&(identical(other.description, description) || other.description == description)&&(identical(other.target, target) || other.target == target)&&(identical(other.value, value) || other.value == value)&&(identical(other.status, status) || other.status == status)&&(identical(other.error, error) || other.error == error)&&(identical(other.durationMs, durationMs) || other.durationMs == durationMs)&&(identical(other.screenshot, screenshot) || other.screenshot == screenshot)&&(identical(other.targetIndex, targetIndex) || other.targetIndex == targetIndex));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RunStepModel&&(identical(other.stepIndex, stepIndex) || other.stepIndex == stepIndex)&&(identical(other.index, index) || other.index == index)&&(identical(other.action, action) || other.action == action)&&(identical(other.description, description) || other.description == description)&&(identical(other.status, status) || other.status == status)&&(identical(other.durationMs, durationMs) || other.durationMs == durationMs)&&(identical(other.error, error) || other.error == error)&&(identical(other.target, target) || other.target == target)&&(identical(other.value, value) || other.value == value)&&(identical(other.screenshot, screenshot) || other.screenshot == screenshot)&&(identical(other.targetIndex, targetIndex) || other.targetIndex == targetIndex));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,index,action,description,target,value,status,error,durationMs,screenshot,targetIndex);
+int get hashCode => Object.hash(runtimeType,stepIndex,index,action,description,status,durationMs,error,target,value,screenshot,targetIndex);
 
 @override
 String toString() {
-  return 'RunStepModel(index: $index, action: $action, description: $description, target: $target, value: $value, status: $status, error: $error, durationMs: $durationMs, screenshot: $screenshot, targetIndex: $targetIndex)';
+  return 'RunStepModel(stepIndex: $stepIndex, index: $index, action: $action, description: $description, status: $status, durationMs: $durationMs, error: $error, target: $target, value: $value, screenshot: $screenshot, targetIndex: $targetIndex)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $RunStepModelCopyWith<$Res>  {
   factory $RunStepModelCopyWith(RunStepModel value, $Res Function(RunStepModel) _then) = _$RunStepModelCopyWithImpl;
 @useResult
 $Res call({
- int index, String action, String description, String target, String? value, String status, String? error,@JsonKey(name: 'duration_ms') int durationMs, String? screenshot,@JsonKey(name: 'target_index') int? targetIndex
+@JsonKey(name: 'step_index') int? stepIndex, int? index, String? action, String? description, String? status,@JsonKey(name: 'duration_ms') int? durationMs, String? error, String? target,@DynamicToStringConverter() String? value, String? screenshot,@JsonKey(name: 'target_index') int? targetIndex
 });
 
 
@@ -65,17 +65,18 @@ class _$RunStepModelCopyWithImpl<$Res>
 
 /// Create a copy of RunStepModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? index = null,Object? action = null,Object? description = null,Object? target = null,Object? value = freezed,Object? status = null,Object? error = freezed,Object? durationMs = null,Object? screenshot = freezed,Object? targetIndex = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? stepIndex = freezed,Object? index = freezed,Object? action = freezed,Object? description = freezed,Object? status = freezed,Object? durationMs = freezed,Object? error = freezed,Object? target = freezed,Object? value = freezed,Object? screenshot = freezed,Object? targetIndex = freezed,}) {
   return _then(_self.copyWith(
-index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
-as int,action: null == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,target: null == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
-as String,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as String?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as String?,durationMs: null == durationMs ? _self.durationMs : durationMs // ignore: cast_nullable_to_non_nullable
-as int,screenshot: freezed == screenshot ? _self.screenshot : screenshot // ignore: cast_nullable_to_non_nullable
+stepIndex: freezed == stepIndex ? _self.stepIndex : stepIndex // ignore: cast_nullable_to_non_nullable
+as int?,index: freezed == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int?,action: freezed == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
+as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,durationMs: freezed == durationMs ? _self.durationMs : durationMs // ignore: cast_nullable_to_non_nullable
+as int?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String?,target: freezed == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
+as String?,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String?,screenshot: freezed == screenshot ? _self.screenshot : screenshot // ignore: cast_nullable_to_non_nullable
 as String?,targetIndex: freezed == targetIndex ? _self.targetIndex : targetIndex // ignore: cast_nullable_to_non_nullable
 as int?,
   ));
@@ -162,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int index,  String action,  String description,  String target,  String? value,  String status,  String? error, @JsonKey(name: 'duration_ms')  int durationMs,  String? screenshot, @JsonKey(name: 'target_index')  int? targetIndex)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'step_index')  int? stepIndex,  int? index,  String? action,  String? description,  String? status, @JsonKey(name: 'duration_ms')  int? durationMs,  String? error,  String? target, @DynamicToStringConverter()  String? value,  String? screenshot, @JsonKey(name: 'target_index')  int? targetIndex)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RunStepModel() when $default != null:
-return $default(_that.index,_that.action,_that.description,_that.target,_that.value,_that.status,_that.error,_that.durationMs,_that.screenshot,_that.targetIndex);case _:
+return $default(_that.stepIndex,_that.index,_that.action,_that.description,_that.status,_that.durationMs,_that.error,_that.target,_that.value,_that.screenshot,_that.targetIndex);case _:
   return orElse();
 
 }
@@ -183,10 +184,10 @@ return $default(_that.index,_that.action,_that.description,_that.target,_that.va
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int index,  String action,  String description,  String target,  String? value,  String status,  String? error, @JsonKey(name: 'duration_ms')  int durationMs,  String? screenshot, @JsonKey(name: 'target_index')  int? targetIndex)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'step_index')  int? stepIndex,  int? index,  String? action,  String? description,  String? status, @JsonKey(name: 'duration_ms')  int? durationMs,  String? error,  String? target, @DynamicToStringConverter()  String? value,  String? screenshot, @JsonKey(name: 'target_index')  int? targetIndex)  $default,) {final _that = this;
 switch (_that) {
 case _RunStepModel():
-return $default(_that.index,_that.action,_that.description,_that.target,_that.value,_that.status,_that.error,_that.durationMs,_that.screenshot,_that.targetIndex);case _:
+return $default(_that.stepIndex,_that.index,_that.action,_that.description,_that.status,_that.durationMs,_that.error,_that.target,_that.value,_that.screenshot,_that.targetIndex);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +204,10 @@ return $default(_that.index,_that.action,_that.description,_that.target,_that.va
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int index,  String action,  String description,  String target,  String? value,  String status,  String? error, @JsonKey(name: 'duration_ms')  int durationMs,  String? screenshot, @JsonKey(name: 'target_index')  int? targetIndex)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'step_index')  int? stepIndex,  int? index,  String? action,  String? description,  String? status, @JsonKey(name: 'duration_ms')  int? durationMs,  String? error,  String? target, @DynamicToStringConverter()  String? value,  String? screenshot, @JsonKey(name: 'target_index')  int? targetIndex)?  $default,) {final _that = this;
 switch (_that) {
 case _RunStepModel() when $default != null:
-return $default(_that.index,_that.action,_that.description,_that.target,_that.value,_that.status,_that.error,_that.durationMs,_that.screenshot,_that.targetIndex);case _:
+return $default(_that.stepIndex,_that.index,_that.action,_that.description,_that.status,_that.durationMs,_that.error,_that.target,_that.value,_that.screenshot,_that.targetIndex);case _:
   return null;
 
 }
@@ -218,17 +219,18 @@ return $default(_that.index,_that.action,_that.description,_that.target,_that.va
 @JsonSerializable()
 
 class _RunStepModel implements RunStepModel {
-  const _RunStepModel({required this.index, required this.action, required this.description, required this.target, this.value, required this.status, this.error, @JsonKey(name: 'duration_ms') required this.durationMs, this.screenshot, @JsonKey(name: 'target_index') this.targetIndex});
+  const _RunStepModel({@JsonKey(name: 'step_index') this.stepIndex, this.index, this.action, this.description, this.status, @JsonKey(name: 'duration_ms') this.durationMs, this.error, this.target, @DynamicToStringConverter() this.value, this.screenshot, @JsonKey(name: 'target_index') this.targetIndex});
   factory _RunStepModel.fromJson(Map<String, dynamic> json) => _$RunStepModelFromJson(json);
 
-@override final  int index;
-@override final  String action;
-@override final  String description;
-@override final  String target;
-@override final  String? value;
-@override final  String status;
+@override@JsonKey(name: 'step_index') final  int? stepIndex;
+@override final  int? index;
+@override final  String? action;
+@override final  String? description;
+@override final  String? status;
+@override@JsonKey(name: 'duration_ms') final  int? durationMs;
 @override final  String? error;
-@override@JsonKey(name: 'duration_ms') final  int durationMs;
+@override final  String? target;
+@override@DynamicToStringConverter() final  String? value;
 @override final  String? screenshot;
 @override@JsonKey(name: 'target_index') final  int? targetIndex;
 
@@ -245,16 +247,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RunStepModel&&(identical(other.index, index) || other.index == index)&&(identical(other.action, action) || other.action == action)&&(identical(other.description, description) || other.description == description)&&(identical(other.target, target) || other.target == target)&&(identical(other.value, value) || other.value == value)&&(identical(other.status, status) || other.status == status)&&(identical(other.error, error) || other.error == error)&&(identical(other.durationMs, durationMs) || other.durationMs == durationMs)&&(identical(other.screenshot, screenshot) || other.screenshot == screenshot)&&(identical(other.targetIndex, targetIndex) || other.targetIndex == targetIndex));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RunStepModel&&(identical(other.stepIndex, stepIndex) || other.stepIndex == stepIndex)&&(identical(other.index, index) || other.index == index)&&(identical(other.action, action) || other.action == action)&&(identical(other.description, description) || other.description == description)&&(identical(other.status, status) || other.status == status)&&(identical(other.durationMs, durationMs) || other.durationMs == durationMs)&&(identical(other.error, error) || other.error == error)&&(identical(other.target, target) || other.target == target)&&(identical(other.value, value) || other.value == value)&&(identical(other.screenshot, screenshot) || other.screenshot == screenshot)&&(identical(other.targetIndex, targetIndex) || other.targetIndex == targetIndex));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,index,action,description,target,value,status,error,durationMs,screenshot,targetIndex);
+int get hashCode => Object.hash(runtimeType,stepIndex,index,action,description,status,durationMs,error,target,value,screenshot,targetIndex);
 
 @override
 String toString() {
-  return 'RunStepModel(index: $index, action: $action, description: $description, target: $target, value: $value, status: $status, error: $error, durationMs: $durationMs, screenshot: $screenshot, targetIndex: $targetIndex)';
+  return 'RunStepModel(stepIndex: $stepIndex, index: $index, action: $action, description: $description, status: $status, durationMs: $durationMs, error: $error, target: $target, value: $value, screenshot: $screenshot, targetIndex: $targetIndex)';
 }
 
 
@@ -265,7 +267,7 @@ abstract mixin class _$RunStepModelCopyWith<$Res> implements $RunStepModelCopyWi
   factory _$RunStepModelCopyWith(_RunStepModel value, $Res Function(_RunStepModel) _then) = __$RunStepModelCopyWithImpl;
 @override @useResult
 $Res call({
- int index, String action, String description, String target, String? value, String status, String? error,@JsonKey(name: 'duration_ms') int durationMs, String? screenshot,@JsonKey(name: 'target_index') int? targetIndex
+@JsonKey(name: 'step_index') int? stepIndex, int? index, String? action, String? description, String? status,@JsonKey(name: 'duration_ms') int? durationMs, String? error, String? target,@DynamicToStringConverter() String? value, String? screenshot,@JsonKey(name: 'target_index') int? targetIndex
 });
 
 
@@ -282,17 +284,18 @@ class __$RunStepModelCopyWithImpl<$Res>
 
 /// Create a copy of RunStepModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? index = null,Object? action = null,Object? description = null,Object? target = null,Object? value = freezed,Object? status = null,Object? error = freezed,Object? durationMs = null,Object? screenshot = freezed,Object? targetIndex = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stepIndex = freezed,Object? index = freezed,Object? action = freezed,Object? description = freezed,Object? status = freezed,Object? durationMs = freezed,Object? error = freezed,Object? target = freezed,Object? value = freezed,Object? screenshot = freezed,Object? targetIndex = freezed,}) {
   return _then(_RunStepModel(
-index: null == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
-as int,action: null == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,target: null == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
-as String,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as String?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
-as String?,durationMs: null == durationMs ? _self.durationMs : durationMs // ignore: cast_nullable_to_non_nullable
-as int,screenshot: freezed == screenshot ? _self.screenshot : screenshot // ignore: cast_nullable_to_non_nullable
+stepIndex: freezed == stepIndex ? _self.stepIndex : stepIndex // ignore: cast_nullable_to_non_nullable
+as int?,index: freezed == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
+as int?,action: freezed == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
+as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,durationMs: freezed == durationMs ? _self.durationMs : durationMs // ignore: cast_nullable_to_non_nullable
+as int?,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String?,target: freezed == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
+as String?,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String?,screenshot: freezed == screenshot ? _self.screenshot : screenshot // ignore: cast_nullable_to_non_nullable
 as String?,targetIndex: freezed == targetIndex ? _self.targetIndex : targetIndex // ignore: cast_nullable_to_non_nullable
 as int?,
   ));

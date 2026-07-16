@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test_agent_mobile/core/network/connectivity_provider.dart';
 import 'package:test_agent_mobile/core/run/data/data_sources/run_local_data_source.dart';
 import 'package:test_agent_mobile/core/run/data/data_sources/run_remote_data_source.dart';
+import 'package:test_agent_mobile/core/run/domain/use_cases/get_all_runs_use_case.dart';
+import 'package:test_agent_mobile/core/run/domain/use_cases/get_project_runs_use_case.dart';
 import 'package:test_agent_mobile/features/auth/presentation/logic/auth_provider.dart';
 import 'package:test_agent_mobile/core/run/data/repo_impl/run_repo_impl.dart';
 import 'package:test_agent_mobile/core/run/domain/repo/run_repo.dart';
@@ -23,4 +25,12 @@ final runRepoProvider = Provider<RunRepo>((ref) {
     local: ref.watch(runLocalDataSourceProvider),
     remote: ref.watch(runRemoteDataSourceProvider),
   );
+});
+
+final getRunsByProjectIdProvider = Provider<GetProjectRunsUseCase>((ref) {
+  return GetProjectRunsUseCase(runRepo: ref.watch(runRepoProvider));
+});
+
+final getAllRunsUseCaseProvider = Provider<GetAllRunsUseCase>((ref) {
+  return GetAllRunsUseCase(runRepo: ref.watch(runRepoProvider));
 });
