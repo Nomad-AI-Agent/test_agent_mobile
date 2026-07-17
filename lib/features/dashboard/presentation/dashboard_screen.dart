@@ -6,6 +6,7 @@ import 'package:test_agent_mobile/core/widgets/error_state_view.dart';
 import 'package:test_agent_mobile/features/dashboard/data/mapper/run_to_sequence_mapper.dart';
 import 'package:test_agent_mobile/features/dashboard/domain/entity/stat_item.dart';
 import 'package:test_agent_mobile/features/dashboard/presentation/logic/dashboard_notifier.dart';
+import 'package:test_agent_mobile/features/dashboard/presentation/logic/dashboard_provider.dart';
 import 'package:test_agent_mobile/features/dashboard/presentation/logic/latest_run_notifier.dart';
 import 'package:test_agent_mobile/features/dashboard/presentation/widgets/dashboard_header.dart';
 import 'package:test_agent_mobile/features/dashboard/presentation/widgets/sequence_card.dart';
@@ -18,19 +19,35 @@ class DashboardScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardState = ref.watch(dashboardProvider);
     final latestRunsState = ref.watch(latestRunsProvider);
+    final isLoading = ref.watch(isDashboardLoadingProvider);
 
     return Scaffold(
       backgroundColor: AppColorsLight.surface,
       body: SafeArea(
-        child: dashboardState.when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (err, _) => ErrorStateView(
-            error: err,
-            onRetry: () => ref.read(dashboardProvider.notifier).refresh(),
-          ),
-          data: (result) {
-            final status = result.status;
-            return SingleChildScrollView(
+        child: Builder(
+          builder: (context) {
+            if (isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (dashboardState.hasError) {
+              return ErrorStateView(
+                error: dashboardState.error!,
+                onRetry: () => ref.read(dashboardProvider.notifier).refresh(),
+              );
+            }
+
+            if (latestRunsState.hasError) {
+              return ErrorStateView(
+                error: latestRunsState.error!,
+                onRetry: () => ref.read(latestRunsProvider.notifier).refresh(),
+              );
+            }
+
+            final status = dashboardState.value!.status;
+            final runs = latestRunsState.value!.runs;
+
+            return Padding(
               padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 20.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,38 +82,20 @@ class DashboardScreen extends ConsumerWidget {
                     ),
                   ),
                   SizedBox(height: 12.h),
-                  latestRunsState.when(
-                    loading: () => const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 24),
-                      child: Center(child: CircularProgressIndicator()),
-                    ),
-                    error: (err, _) => ErrorStateView(
-                      error: err,
-                      onRetry: () =>
-                          ref.read(latestRunsProvider.notifier).refresh(),
-                    ),
-                    data: (runsResult) {
-                      final runs = runsResult.runs;
-                      if (runs.isEmpty) {
-                        return const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 24),
-                          child: Center(child: Text('No runs yet.')),
-                        );
-                      }
-                      return ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: runs.length > 5 ? 5 : runs.length,
-                        separatorBuilder: (_, _) => SizedBox(height: 10.h),
-                        itemBuilder: (context, index) {
-                          final run = runs[index];
-                          return SequenceCard(
-                            sequence: run.toSequenceItem(),
-                            onTap: () {},
-                          );
-                        },
-                      );
-                    },
+                  Expanded(
+                    child: runs.isEmpty
+                        ? const Center(child: Text('No runs yet.'))
+                        : ListView.separated(
+                            itemCount: runs.length,
+                            separatorBuilder: (_, _) => SizedBox(height: 10.h),
+                            itemBuilder: (context, index) {
+                              final run = runs[index];
+                              return SequenceCard(
+                                sequence: run.toSequenceItem(),
+                                onTap: () {},
+                              );
+                            },
+                          ),
                   ),
                 ],
               ),

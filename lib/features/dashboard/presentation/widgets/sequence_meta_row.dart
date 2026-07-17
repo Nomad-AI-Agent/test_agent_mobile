@@ -14,18 +14,43 @@ class SequenceMetaRow extends StatelessWidget {
     required this.failedSteps,
   });
 
-  Widget _metaChip(IconData icon, String text) {
-    return Row(
+  Widget _metaChip(IconData icon, String text, {bool truncate = false}) {
+    final child = Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, size: 12.sp, color: AppColorsLight.textMuted),
         SizedBox(width: 4.w),
-        Text(
-          text,
-          style: TextStyle(fontSize: 11.sp, color: AppColorsLight.textMuted),
-        ),
+        truncate
+            ? Flexible(
+                child: Text(
+                  text,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 11.sp,
+                    color: AppColorsLight.textMuted,
+                  ),
+                ),
+              )
+            : Text(
+                text,
+                style: TextStyle(
+                  fontSize: 11.sp,
+                  color: AppColorsLight.textMuted,
+                ),
+              ),
       ],
     );
+
+    if (truncate) {
+      return ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: 180.w,
+        ), //
+        child: child,
+      );
+    }
+    return child;
   }
 
   @override
@@ -35,7 +60,7 @@ class SequenceMetaRow extends StatelessWidget {
       runSpacing: 4.h,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        _metaChip(Icons.link, url),
+        _metaChip(Icons.link, url, truncate: true),
         _metaChip(Icons.checklist_rtl, "${passedSteps}p / ${failedSteps}f"),
       ],
     );

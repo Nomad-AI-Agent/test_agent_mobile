@@ -34,13 +34,6 @@ class ProjectsListView extends ConsumerWidget {
 
         return Column(
           children: [
-            PaginationControls(
-              currentPage: pageData.currentPage,
-              totalPages: pageData.totalPages,
-              onPageChanged: (page) =>
-                  ref.read(projectsPaginationProvider.notifier).setPage(page),
-            ),
-            SizedBox(height: 16.h),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () =>
@@ -57,6 +50,13 @@ class ProjectsListView extends ConsumerWidget {
                   },
                 ),
               ),
+            ),
+            SizedBox(height: 16.h),
+            PaginationControls(
+              currentPage: pageData.currentPage,
+              totalPages: pageData.totalPages,
+              onPageChanged: (page) =>
+                  ref.read(projectsPaginationProvider.notifier).setPage(page),
             ),
           ],
         );
