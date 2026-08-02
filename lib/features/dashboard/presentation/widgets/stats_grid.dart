@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test_agent_mobile/core/styles/app_colors.dart';
 import 'package:test_agent_mobile/features/dashboard/domain/entity/stat_item.dart';
-import 'package:test_agent_mobile/features/dashboard/presentation/widgets/state_card.dart';
+import 'package:test_agent_mobile/core/widgets/state_card.dart';
 
 class StatsGrid extends StatelessWidget {
   final List<StatItem> stats;
@@ -22,7 +23,11 @@ class StatsGrid extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         final stat = stats[index];
-        return StatCard(label: stat.label, value: stat.value);
+        return StatCard(
+          label: stat.label,
+          value: stat.value,
+          color: AppColorsLight.onSurface,
+        );
       },
     );
   }

@@ -6,6 +6,7 @@ import 'package:test_agent_mobile/features/auth/presentation/views/login_screen.
 import 'package:test_agent_mobile/features/auth/presentation/views/register_screen.dart';
 import 'package:test_agent_mobile/features/navigation/main_nav_shell.dart';
 import 'package:test_agent_mobile/features/onboarding/presentation/onboarding_screen.dart';
+import 'package:test_agent_mobile/features/project_details/presentation/project_details.dart';
 import 'package:test_agent_mobile/features/projects/presentation/projects_screen.dart';
 import 'package:test_agent_mobile/features/splash/animated_splash_screen.dart';
 import 'package:test_agent_mobile/features/welcome/presentation/welcome_screen.dart';
@@ -45,7 +46,7 @@ class AppRoute {
           child: AnimatedSplashScreen(
             onAnimationComplete: () async {
               // final route = await determineInitialRoute();
-              const  route = Routes.navigationScreen;
+              const route = Routes.navigationScreen;
               if (context.mounted) {
                 context.go(route);
               }
@@ -60,6 +61,15 @@ class AppRoute {
         pageBuilder: (context, state) => _buildPageWithTransition(
           key: state.pageKey,
           child: const WelcomeScreen(),
+        ),
+      ),
+
+      GoRoute(
+        path: Routes.projectDetails,
+        name: Routes.projectDetails,
+        pageBuilder: (context, state) => _buildPageWithTransition(
+          key: state.pageKey,
+          child: const ProjectDetails(),
         ),
       ),
       GoRoute(

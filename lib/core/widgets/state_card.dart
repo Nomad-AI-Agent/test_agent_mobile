@@ -5,12 +5,9 @@ import 'package:test_agent_mobile/core/styles/app_colors.dart';
 class StatCard extends StatelessWidget {
   final String label;
   final String value;
+  final Color color;
 
-  const StatCard({
-    super.key,
-    required this.label,
-    required this.value,
-  });
+  const StatCard({super.key, required this.label, required this.value, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +37,7 @@ class StatCard extends StatelessWidget {
               fontFamily: "Newsreader",
               fontSize: 26.sp,
               fontWeight: FontWeight.w600,
-              color: AppColorsLight.onSurface,
+              color: color,
             ),
           ),
         ],

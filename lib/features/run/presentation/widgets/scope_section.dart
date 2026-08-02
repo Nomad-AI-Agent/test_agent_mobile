@@ -1,10 +1,8 @@
-// lib/features/run/presentation/widgets/scope_section.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_agent_mobile/core/styles/app_colors.dart';
 import 'package:test_agent_mobile/features/projects/domain/entities/projects_result.dart';
-import 'package:test_agent_mobile/features/projects/presentation/logic/notifiers/get_projects_notifier.dart';
 import 'package:test_agent_mobile/features/run/data/models/target_row.dart';
 import 'package:test_agent_mobile/features/run/presentation/widgets/multi_role_toggle.dart';
 import 'package:test_agent_mobile/features/run/presentation/widgets/multi_target_section.dart';
@@ -133,6 +131,7 @@ class _ProjectSelectorError extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColorsLight.surface,
         borderRadius: BorderRadius.circular(10.r),
+        // ignore: deprecated_member_use
         border: Border.all(color: Colors.redAccent.withOpacity(0.4)),
       ),
       child: Row(

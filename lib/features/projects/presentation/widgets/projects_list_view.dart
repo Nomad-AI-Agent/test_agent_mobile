@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:test_agent_mobile/core/routing/routes.dart';
 import 'package:test_agent_mobile/core/widgets/error_state_view.dart';
 import 'package:test_agent_mobile/features/projects/data/helper/project_model_mapper.dart';
 import 'package:test_agent_mobile/features/projects/presentation/logic/notifiers/get_projects_notifier.dart';
@@ -45,7 +47,9 @@ class ProjectsListView extends ConsumerWidget {
                     final project = pageData.pageItems[index];
                     return ProjectCard(
                       project: project.toEntity(),
-                      onTap: () {},
+                      onTap: () {
+                        context.pushNamed(Routes.projectDetails);
+                      },
                     );
                   },
                 ),
